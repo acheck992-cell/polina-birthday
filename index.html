@@ -3,733 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Polina! ✨💖🌸</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400;1,700&display=swap" rel="stylesheet">
+    <title>For Polina ✨💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,400;1,700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --paper-bg: #f5f0e6;
-            --scrapbook-card: #fffdf9;
-            --primary-rose: #ff758c;
-            --primary-yellow: #ffd700;
-            --accent-pink: #ec4899;
-            --accent-purple: #9333ea;
-            --accent-sky: #38bdf8;
-            --text-dark: #2d3748;
-            --text-sub: #64748b;
+            --paper: #fcfaf2;
+            --rose: #ff758c;
+            --gold: #ffd700;
+            --ink: #2d3436;
+            --tape: rgba(168, 85, 247, 0.3);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
-        html, body {
-            background: #121026;
-            background-image: radial-gradient(rgba(255, 117, 140, 0.15) 1px, transparent 0);
-            background-size: 24px 24px;
-            overflow-x: hidden;
+        body {
+            background-color: #0f0e17;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
             font-family: 'Montserrat', sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-            width: 100vw;
-            position: relative;
-        }
-
-        #worldCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Floating Audio Widget */
-        .music-widget {
-            position: fixed;
-            top: 18px;
-            right: 18px;
-            z-index: 10000;
-            background: rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
-            padding: 10px 18px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .music-widget:hover {
-            transform: scale(1.05);
-        }
-
-        .music-icon {
-            font-size: 20px;
-            animation: musicSpin 4s linear infinite;
-        }
-
-        @keyframes musicSpin {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Stages Wrapper */
-        .stage-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 10;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            overflow-y: auto;
-        }
-
-        .stage-hidden {
-            opacity: 0 !important;
-            pointer-events: none !important;
-            transform: scale(0.92) translateY(30px);
-        }
-
-        /* Scrapbook Aesthetic Elements */
-        .scrapbook-card {
-            width: 100%;
-            max-width: 520px;
-            background: var(--paper-bg);
-            background-image: radial-gradient(#e5decf 1px, transparent 0);
-            background-size: 16px 16px;
-            border-radius: 28px;
-            padding: clamp(24px, 4vh, 38px) clamp(20px, 5vw, 32px);
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(0,0,0,0.05);
-            color: var(--text-dark);
-            text-align: center;
-            position: relative;
-            margin: auto;
-            border: 8px solid #ffffff;
-        }
-
-        /* Washi Tape / Tape Deco */
-        .tape-deco {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-2deg);
-            width: 120px;
-            height: 32px;
-            background: rgba(255, 117, 140, 0.45);
-            backdrop-filter: blur(4px);
-            border: 1px dashed rgba(255,255,255,0.6);
-            z-index: 5;
-        }
-
-        .btn-action {
-            padding: 16px 36px;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            background: linear-gradient(135deg, #ff758c, #a855f7);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.4);
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .btn-action:active {
-            transform: scale(0.95);
-        }
-
-        /* Stage 1: Welcome */
-        .welcome-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(34px, 8vw, 54px);
-            font-style: italic;
-            color: #be123c;
-            margin-bottom: 15px;
-        }
-
-        .welcome-subtitle {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(26px, 6vw, 36px);
-            color: #a855f7;
-            margin-bottom: 20px;
-        }
-
-        /* Polaroid Frame Grid */
-        .polaroid-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-            max-height: 55vh;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .polaroid-item {
-            background: #ffffff;
-            padding: 10px 10px 25px 10px;
-            border-radius: 6px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transform: rotate(calc(-4deg + 8deg * var(--rand)));
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .polaroid-item:hover {
-            transform: scale(1.08) rotate(0deg) z-index 10;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-        }
-
-        .polaroid-item img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .polaroid-caption {
-            font-family: 'Caveat', cursive;
-            font-size: 16px;
-            color: #334155;
-            margin-top: 8px;
-        }
-
-        /* Film Strip Reel (Stage 3) */
-        .film-reel-container {
-            width: 100%;
-            background: #111;
-            padding: 15px 0;
-            border-top: 6px dashed #fff;
-            border-bottom: 6px dashed #fff;
-            overflow-x: auto;
-            white-space: nowrap;
-            margin: 20px 0;
-            border-radius: 12px;
-            display: flex;
-            gap: 15px;
-            scroll-behavior: smooth;
-        }
-
-        .film-frame {
-            display: inline-block;
-            width: 140px;
-            height: 180px;
-            background: #fff;
-            padding: 6px;
-            flex-shrink: 0;
-            border-radius: 4px;
-        }
-
-        .film-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Camera Flash Reveal (Stage 4) */
-        .snoopy-cam-box {
-            position: relative;
-            width: 180px;
-            height: 140px;
-            margin: 0 auto 15px auto;
-            background: #e2e8f0;
-            border: 4px solid #334155;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .cam-lens {
-            width: 70px;
-            height: 70px;
-            background: #1e293b;
-            border: 5px solid #94a3b8;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cam-glass {
-            width: 30px;
-            height: 30px;
-            background: #38bdf8;
-            border-radius: 50%;
-            box-shadow: inset 0 0 10px #ffffff;
-        }
-
-        .flash-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+            overflow: hidden;
             height: 100vh;
-            background: #ffffff;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 9999;
-            transition: opacity 0.15s ease-out;
+            color: var(--ink);
         }
+
+        /* Background Visuals */
+        #canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        .flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 10000; opacity: 0; pointer-events: none; }
+
+        /* Stages */
+        .stage {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 10; padding: 20px;
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .hidden { opacity: 0; transform: scale(0.8) translateY(50px); pointer-events: none; }
+
+        /* Scrapbook Container */
+        .book-page {
+            width: 100%; max-width: 450px;
+            background: var(--paper);
+            background-image: radial-gradient(#d1ccc0 1px, transparent 0);
+            background-size: 20px 24px;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2), 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            border: 2px solid #e5e5e5;
+            text-align: center;
+        }
+
+        /* Tape & Decoration */
+        .tape {
+            position: absolute; width: 100px; height: 30px;
+            background: var(--tape);
+            backdrop-filter: blur(2px);
+            border: 1px dashed rgba(255,255,255,0.5);
+            top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+        }
+
+        /* Polaroid Aesthetic */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: rotate(var(--r));
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 2px;
+        }
+        .polaroid img { width: 100%; height: 250px; object-fit: cover; border: 1px solid #eee; }
+        .polaroid span { font-family: 'Caveat', cursive; font-size: 22px; margin-top: 10px; display: block; color: #444; }
+
+        /* Mascot reveal */
+        .mascot-container { width: 100%; height: 120px; position: relative; overflow: hidden; }
+        .bunny {
+            position: absolute; bottom: 0; left: -100px;
+            width: 80px; transition: left 3s ease-out;
+        }
+
+        /* Film Reel */
+        .film-reel {
+            width: 100%; background: #1a1a1a;
+            padding: 20px 0; margin: 20px 0;
+            display: flex; gap: 15px; overflow-x: auto;
+            border-top: 5px dashed #444; border-bottom: 5px dashed #444;
+        }
+        .film-frame { flex-shrink: 0; width: 120px; height: 160px; background: white; padding: 5px; }
+        .film-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Camera */
+        .camera {
+            width: 150px; height: 100px; background: #333;
+            border-radius: 15px; position: relative; margin: 20px auto;
+            border: 4px solid #555; cursor: pointer;
+        }
+        .lens {
+            width: 60px; height: 60px; background: #222;
+            border-radius: 50%; border: 6px solid #444;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--rose), var(--accent-purple));
+            color: white; border: none; padding: 15px 40px;
+            border-radius: 50px; font-weight: 700; cursor: pointer;
+            margin-top: 20px; box-shadow: 0 5px 15px rgba(255,117,140,0.4);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Typing Effect */
+        .typing { font-family: 'Playfair Display', serif; font-style: italic; font-size: 28px; min-height: 80px; }
 
         /* Reasons Jar */
-        .jar-box {
-            font-size: 80px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            margin: 15px 0;
-            display: inline-block;
-        }
-
-        .jar-box:active {
-            transform: scale(1.15) rotate(10deg);
-        }
-
-        /* Cake Candle */
-        .cake-container {
-            position: relative;
-            width: 220px;
-            height: 180px;
-            margin: 0 auto 20px auto;
-            cursor: pointer;
-        }
-
-        .cake-base {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 45%;
-            background: linear-gradient(to right, #ff758c, #f472b6);
-            border-radius: 20px 20px 12px 12px;
-            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.4);
-        }
-
-        .cake-top {
-            position: absolute;
-            bottom: 42%;
-            left: 10%;
-            width: 80%;
-            height: 38%;
-            background: linear-gradient(to right, #ffd700, #fef08a);
-            border-radius: 18px 18px 10px 10px;
-        }
-
-        .candle {
-            position: absolute;
-            bottom: 78%;
-            left: 46%;
-            width: 8%;
-            height: 25%;
-            background: linear-gradient(to bottom, #a855f7, #c084fc);
-            border-radius: 4px;
-        }
-
-        .flame {
-            position: absolute;
-            top: -45%;
-            left: -30%;
-            width: 160%;
-            height: 50%;
-            background: radial-gradient(ellipse at bottom, #ffeb3b 0%, #ff5722 100%);
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 18px #ffeb3b, 0 0 30px #ff5722;
-            animation: flameFlicker 0.2s infinite alternate ease-in-out;
-        }
-
-        @keyframes flameFlicker {
-            0% { transform: scale(1) rotate(-3deg); }
-            100% { transform: scale(1.15) rotate(3deg); }
-        }
-
-        /* Scratch Card */
-        .scratch-wrapper {
-            position: relative;
-            width: 100%;
-            height: 160px;
-            margin: 18px 0;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .scratch-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border: 2px dashed #ff758c;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            text-align: center;
-            color: #be123c;
-            font-family: 'Caveat', cursive;
-            font-size: 24px;
-            line-height: 1.4;
-        }
-
-        #scratchCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            cursor: crosshair;
-            z-index: 2;
-        }
+        .jar { font-size: 80px; cursor: pointer; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.2)); }
     </style>
 </head>
 <body>
 
-    <!-- VFX Canvas Layer -->
-    <canvas id="worldCanvas"></canvas>
-    <div class="flash-overlay" id="flashOverlay"></div>
+    <div class="flash" id="flashOverlay"></div>
+    <canvas id="canvas"></canvas>
 
-    <!-- Music Control Widget -->
-    <div class="music-widget" onclick="toggleAudio()">
-        <span class="music-icon">🎵</span>
-        <span style="font-size: 13px; font-weight: 600;" id="musicStatus">Play Made In Japan</span>
-    </div>
-
-    <!-- STAGE 1: PORTAL WELCOME -->
-    <div class="stage-container" id="stage1">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <div class="welcome-title">Happy Birthday!</div>
-            <div class="welcome-subtitle">Dearest Polina ✨🌸</div>
-            <p style="font-size: 14.5px; color: var(--text-sub); line-height: 1.6;">
-                A special interactive memory book crafted just for you! Ready to open your birthday surprise?
-            </p>
-            <button class="btn-action" onclick="startJourney()">OPEN SCRAPBOOK 📖</button>
+    <div class="stage" id="s1">
+        <div class="book-page">
+            <div class="tape"></div>
+            <h1 style="font-family: 'Dancing Script', cursive; font-size: 45px; color: var(--rose);">Happy Birthday!</h1>
+            <p style="font-family: 'Caveat', cursive; font-size: 28px; margin: 15px 0;">To the most special girl, Polina ✨</p>
+            <button class="btn" onclick="start()">OPEN MEMORY BOOK 📖</button>
         </div>
     </div>
 
-    <!-- STAGE 2: POLAROID SCRAPBOOK GALLERY -->
-    <div class="stage-container stage-hidden" id="stage2">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: #be123c;">Polina's Polaroid Journal 📸</h2>
-            <p style="font-size: 13px; color: var(--text-sub);">Tap any picture to zoom into memories!</p>
+    <div class="stage hidden" id="s2">
+        <div class="book-page">
+            <div class="typing" id="typeText"></div>
+            <button class="btn" onclick="next(2,3)">CONTINUE ➔</button>
+        </div>
+    </div>
 
-            <div class="polaroid-grid">
-                <div class="polaroid-item" style="--rand: -0.6;" onclick="burstAt(event)">
-                    <img src="IMG_20260901_200944_844.jpg" alt="Polina">
-                    <div class="polaroid-caption">Favorite Smile ✨</div>
+    <div class="stage hidden" id="s3">
+        <div class="book-page">
+            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Someone came to see you!</h2>
+            <div class="mascot-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXU1bm13OHR4eHpxeHpxeHpxeHpxeHpxeHpxeHpxeHpxeHpxZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/v8x6KXvXyjkpP8t6J8/giphy.gif" class="bunny" id="bunnyMascot">
+            </div>
+            <div class="polaroid show-photo" style="--r: 3deg; opacity: 0; transition: 1s;" id="p1">
+                <img src="IMG_20260901_200944_844.jpg">
+                <span>The Cutest Smile! 🌸</span>
+            </div>
+            <button class="btn" onclick="next(3,4)">VIEW REEL 🎞️</button>
+        </div>
+    </div>
+
+    <div class="stage hidden" id="s4">
+        <div class="book-page" style="max-width: 500px;">
+            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Polina's Film Strip 🎞️</h2>
+            <div class="film-reel">
+                <div class="film-frame"><img src="IMG_20260901_200957_131.jpg"></div>
+                <div class="film-frame"><img src="IMG_20260901_200959_442.jpg"></div>
+                <div class="film-frame"><img src="IMG_20260901_201005_331.jpg"></div>
+                <div class="film-frame"><img src="IMG_20260901_201042_428.jpg"></div>
+                <div class="film-frame"><img src="IMG_20260901_201044_865.jpg"></div>
+            </div>
+            <button class="btn" onclick="next(4,5)">SNAP A PHOTO 📷</button>
+        </div>
+    </div>
+
+    <div class="stage hidden" id="s5">
+        <div class="book-page">
+            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Retro Camera Moment</h2>
+            <div class="camera" onclick="snap()">
+                <div class="lens"></div>
+                <div style="position:absolute; top: 10px; right: 20px; width: 20px; height: 10px; background: red; border-radius: 2px;"></div>
+            </div>
+            <div id="snapResult" style="display:none; margin-top: 20px;">
+                <div class="polaroid" style="--r:-2deg;">
+                    <img src="IMG_20260901_201054_818.jpg">
+                    <span>Captured your magic! ✨</span>
                 </div>
-                <div class="polaroid-item" style="--rand: 0.8;" onclick="burstAt(event)">
-                    <img src="IMG_20260901_200957_131.jpg" alt="Polina">
-                    <div class="polaroid-caption">Pure Joy 🌸</div>
-                </div>
-                <div class="polaroid-item" style="--rand: -0.4;" onclick="burstAt(event)">
-                    <img src="IMG_20260901_200959_442.jpg" alt="Polina">
-                    <div class="polaroid-caption">Sweet Moments 💫</div>
-                </div>
-                <div class="polaroid-item" style="--rand: 0.5;" onclick="burstAt(event)">
-                    <img src="IMG_20260901_201005_331.jpg" alt="Polina">
-                    <div class="polaroid-caption">So Genuine 🌷</div>
-                </div>
             </div>
-
-            <button class="btn-action" onclick="switchStage('stage2', 'stage3')">VIEW FILM REEL 🎞️</button>
+            <button class="btn" onclick="next(5,6)">THE JAR 🫙</button>
         </div>
     </div>
 
-    <!-- STAGE 3: FILM REEL STRIP -->
-    <div class="stage-container stage-hidden" id="stage3">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: #a855f7;">Memory Reel Roll 🎞️</h2>
-            <p style="font-size: 13px; color: var(--text-sub);">Swipe horizontally to scroll through memories!</p>
-
-            <div class="film-reel-container">
-                <div class="film-frame"><img src="IMG_20260901_201042_428.jpg" alt="Polina"></div>
-                <div class="film-frame"><img src="IMG_20260901_201044_865.jpg" alt="Polina"></div>
-                <div class="film-frame"><img src="IMG_20260901_201054_818.jpg" alt="Polina"></div>
-                <div class="film-frame"><img src="IMG_20260901_201059_484.jpg" alt="Polina"></div>
-            </div>
-
-            <button class="btn-action" onclick="switchStage('stage3', 'stage4')">SNOOPY CAMERA 📷</button>
+    <div class="stage hidden" id="s6">
+        <div class="book-page">
+            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Reasons Polina is Special</h2>
+            <div class="jar" onclick="popReason()">🫙</div>
+            <div id="reasonNote" style="font-family: 'Caveat', cursive; font-size: 26px; color: var(--rose); min-height: 40px; margin-top: 10px;">Tap the jar!</div>
+            <button class="btn" onclick="next(6,7)">GRAND FINALE 🎉</button>
         </div>
     </div>
 
-    <!-- STAGE 4: SNOOPY VINTAGE CAMERA FLASH -->
-    <div class="stage-container stage-hidden" id="stage4">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: #0284c7;">Snap A Memory! 📸</h2>
-            <p style="font-size: 13.5px; color: var(--text-sub); margin-bottom: 15px;">Tap the Snoopy camera lens to take a flash shot!</p>
-
-            <div class="snoopy-cam-box" onclick="triggerCameraSnap()">
-                <div class="cam-lens"><div class="cam-glass"></div></div>
+    <div class="stage hidden" id="s7">
+        <div class="book-page">
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 40px; color: var(--rose);">Happy Birthday Polina!</h2>
+            <div class="polaroid" style="--r: 0deg; width: 90%;">
+                <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg">
+                <span>The Birthday Queen 👑</span>
             </div>
-
-            <div id="camPhotoResult" style="display: none; margin-top: 10px;">
-                <img src="IMG_20260901_201103_170.jpg" style="width: 100%; max-height: 220px; object-fit: cover; border-radius: 16px; border: 4px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
-            </div>
-
-            <button class="btn-action" onclick="switchStage('stage4', 'stage5')">REASONS JAR 🫙</button>
+            <p style="font-size: 14px; line-height: 1.5;">May your life be as aesthetic and beautiful as this book! You deserve all the love. 💖</p>
+            <div style="font-family: 'Caveat', cursive; font-size: 28px; margin-top: 10px;">— With Love ✨</div>
         </div>
     </div>
 
-    <!-- STAGE 5: REASONS WHY POLINA IS SPECIAL JAR -->
-    <div class="stage-container stage-hidden" id="stage5">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: #db2777;">Why Polina Is Amazing 🫙</h2>
-            <p style="font-size: 13px; color: var(--text-sub);">Tap the jar to draw a note!</p>
-
-            <div class="jar-box" onclick="drawReasonNote(event)">🫙</div>
-
-            <div id="reasonNoteDisplay" style="font-family: 'Caveat', cursive; font-size: 26px; color: #be123c; min-height: 60px; margin-top: 10px;">
-                "Tap the jar to see!"
-            </div>
-
-            <button class="btn-action" onclick="switchStage('stage5', 'stage6')">MAKE A WISH 🕯️</button>
-        </div>
-    </div>
-
-    <!-- STAGE 6: VIRTUAL CAKE & CANDLE -->
-    <div class="stage-container stage-hidden" id="stage6">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <div class="cake-container" onclick="blowCandle()">
-                <div class="cake-base"></div>
-                <div class="cake-top"></div>
-                <div class="candle"><div class="flame" id="flameElem"></div></div>
-            </div>
-            <h3 style="font-family: 'Caveat', cursive; font-size: 32px; color: #d97706;" id="wishText">Polina, make a wish & tap the flame! 🕯️✨</h3>
-        </div>
-    </div>
-
-    <!-- STAGE 7: SECRET SCRATCH CARD -->
-    <div class="stage-container stage-hidden" id="stage7">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: #be123c;">Secret Wish For Polina 💌</h2>
-            <p style="font-size: 13px; color: var(--text-sub);">Scratch below to reveal the secret note!</p>
-
-            <div class="scratch-wrapper">
-                <div class="scratch-content">
-                    "Polina, may your year be filled with pure joy, warm smiles, success, and endless magic! 🌸✨"
-                </div>
-                <canvas id="scratchCanvas"></canvas>
-            </div>
-
-            <button class="btn-action" onclick="switchStage('stage7', 'stage8'); triggerGrandFinale();">GRAND FINALE 🎉</button>
-        </div>
-    </div>
-
-    <!-- STAGE 8: GRAND FINALE SCRAPBOOK -->
-    <div class="stage-container stage-hidden" id="stage8">
-        <div class="scrapbook-card">
-            <div class="tape-deco"></div>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 42px; color: #be123c; font-style: italic;">Happy Birthday!</h1>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 36px; color: #a855f7; margin-bottom: 12px;">Dear Polina 🌸✨</h2>
-
-            <div style="display: flex; gap: 10px; margin: 15px 0;">
-                <img src="IMG_20260901_201105_208.jpg" style="width: 50%; height: 130px; object-fit: cover; border-radius: 12px; border: 3px solid #fff;">
-                <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg" style="width: 50%; height: 130px; object-fit: cover; border-radius: 12px; border: 3px solid #fff;">
-            </div>
-
-            <p style="font-size: 14px; line-height: 1.6; color: #334155;">
-                Wishing you the most wonderful birthday celebration! Thank you for bring so much warmth, kindness, and positivity into the world! 💖
-            </p>
-
-            <div style="font-family: 'Caveat', cursive; font-size: 30px; color: #be123c; margin-top: 15px;">
-                Have The Best Day Ever! 🌌🎉
-            </div>
-        </div>
-    </div>
-
-    <!-- Audio Track linked directly to repository file -->
-    <audio id="bgSong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop></audio>
+    <audio id="music" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop></audio>
 
     <script>
-        /* Canvas Visual Effects */
-        const canvas = document.getElementById('worldCanvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        const music = document.getElementById('music');
+        const flash = document.getElementById('flashOverlay');
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        class HeartParticle {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.size = Math.random() * 12 + 8;
-                this.vx = (Math.random() - 0.5) * 4;
-                this.vy = -Math.random() * 4 - 2;
-                this.alpha = 1;
-                this.color = ['#ff758c', '#ffd700', '#ec4899', '#38bdf8', '#a855f7'][Math.floor(Math.random() * 5)];
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.alpha -= 0.015;
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = Math.max(0, this.alpha);
-                ctx.fillStyle = this.color;
-                ctx.font = `${this.size}px Montserrat`;
-                ctx.fillText('🌸', this.x, this.y);
-                ctx.restore();
-            }
+        function start() {
+            music.play();
+            next(1,2);
+            type();
         }
 
-        let particles = [];
-        function burstAt(e) {
-            const x = e.clientX || window.innerWidth / 2;
-            const y = e.clientY || window.innerHeight / 2;
-            for(let i = 0; i < 20; i++) {
-                particles.push(new HeartParticle(x, y));
-            }
-        }
-
-        function renderLoop() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach((p, idx) => {
-                if (p.alpha <= 0) particles.splice(idx, 1);
-                else { p.update(); p.draw(); }
-            });
-            requestAnimationFrame(renderLoop);
-        }
-
-        /* Stage Switcher & Audio */
-        let isAudioPlaying = false;
-        function toggleAudio() {
-            const song = document.getElementById('bgSong');
-            const status = document.getElementById('musicStatus');
-            if(isAudioPlaying) {
-                song.pause();
-                status.innerText = "Play Made In Japan";
-                isAudioPlaying = false;
-            } else {
-                song.play().catch(() => {});
-                status.innerText = "Playing Made In Japan 🎵";
-                isAudioPlaying = true;
-            }
-        }
-
-        function switchStage(fromId, toId) {
-            document.getElementById(fromId).classList.add('stage-hidden');
+        function next(curr, next) {
+            document.getElementById('s'+curr).classList.add('hidden');
             setTimeout(() => {
-                document.getElementById(toId).classList.remove('stage-hidden');
+                document.getElementById('s'+next).classList.remove('hidden');
+                if(next === 3) startMascot();
+            }, 600);
+        }
+
+        function type() {
+            const lines = ["Today is not a normal day...", "The universe is celebrating...", "Because Polina was born! 🌸"];
+            let i = 0, j = 0, text = "";
+            const el = document.getElementById('typeText');
+            function step() {
+                if (i < lines.length) {
+                    if (j < lines[i].length) {
+                        text += lines[i][j];
+                        el.innerHTML = text;
+                        j++;
+                        setTimeout(step, 50);
+                    } else {
+                        text += "<br>";
+                        i++; j = 0;
+                        setTimeout(step, 1000);
+                    }
+                }
+            }
+            step();
+        }
+
+        function startMascot() {
+            const b = document.getElementById('bunnyMascot');
+            const p = document.getElementById('p1');
+            setTimeout(() => {
+                b.style.left = "40%";
+                setTimeout(() => {
+                    p.style.opacity = "1";
+                    p.style.transform = "scale(1) rotate(3deg)";
+                }, 1500);
             }, 500);
         }
 
-        function startJourney() {
-            toggleAudio();
-            switchStage('stage1', 'stage2');
+        function snap() {
+            flash.style.opacity = "1";
+            setTimeout(() => flash.style.opacity = "0", 100);
+            document.getElementById('snapResult').style.display = "block";
+            for(let i=0; i<30; i++) particles.push(new Particle(window.innerWidth/2, window.innerHeight/2));
         }
 
-        /* Snoopy Camera Snap */
-        function triggerCameraSnap() {
-            const flash = document.getElementById('flashOverlay');
-            flash.style.opacity = '1';
-            setTimeout(() => { flash.style.opacity = '0'; }, 150);
-            
-            setTimeout(() => {
-                document.getElementById('camPhotoResult').style.display = 'block';
-                burstAt({ clientX: width/2, clientY: height/2 });
-            }, 300);
+        const reasons = ["Your beautiful energy ✨", "Your kind heart 💖", "The way you smile 🌸", "How special you are 💫", "Your pure soul 🌷"];
+        let rIdx = 0;
+        function popReason() {
+            document.getElementById('reasonNote').innerText = reasons[rIdx % reasons.length];
+            rIdx++;
+            for(let i=0; i<15; i++) particles.push(new Particle(window.innerWidth/2, window.innerHeight/2));
         }
 
-        /* Reasons Jar System */
-        const reasons = [
-            "Your warm and cheerful smile! ✨",
-            "How genuine & kind you are 🌸",
-            "Your amazing positive vibe 💫",
-            "Being such a sweet bestie! 💖",
-            "Bringing light everywhere you go 🌷"
-        ];
-        let reasonIdx = 0;
+        /* Particle System */
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        let particles = [];
 
-        function drawReasonNote(e) {
-            document.getElementById('reasonNoteDisplay').innerText = reasons[reasonIdx % reasons.length];
-            reasonIdx++;
-            burstAt(e);
-        }
-
-        /* Candle Blow */
-        function blowCandle() {
-            document.getElementById('flameElem').style.opacity = '0';
-            document.getElementById('wishText').innerText = "Wish Made! ✨💖";
-            burstAt({ clientX: width/2, clientY: height/2 });
-            setTimeout(() => {
-                switchStage('stage6', 'stage7');
-                initScratchCard();
-            }, 1200);
-        }
-
-        /* Scratch Card */
-        function initScratchCard() {
-            const sCanvas = document.getElementById('scratchCanvas');
-            const sCtx = sCanvas.getContext('2d');
-            sCanvas.width = sCanvas.offsetWidth;
-            sCanvas.height = sCanvas.offsetHeight;
-
-            sCtx.fillStyle = '#ff758c';
-            sCtx.fillRect(0, 0, sCanvas.width, sCanvas.height);
-
-            sCtx.font = "22px Caveat, cursive";
-            sCtx.fillStyle = "#ffffff";
-            sCtx.textAlign = "center";
-            sCtx.fillText("Scratch For Polina! ✨", sCanvas.width / 2, sCanvas.height / 2 + 5);
-
-            let isScratching = false;
-            function scratch(e) {
-                if (!isScratching) return;
-                const rect = sCanvas.getBoundingClientRect();
-                const x = (e.clientX || e.touches[0].clientX) - rect.left;
-                const y = (e.clientY || e.touches[0].clientY) - rect.top;
-
-                sCtx.globalCompositeOperation = 'destination-out';
-                sCtx.beginPath();
-                sCtx.arc(x, y, 22, 0, Math.PI * 2);
-                sCtx.fill();
+        class Particle {
+            constructor(x, y) {
+                this.x = x; this.y = y;
+                this.size = Math.random() * 8 + 4;
+                this.vx = (Math.random() - 0.5) * 10;
+                this.vy = (Math.random() - 0.5) * 10;
+                this.alpha = 1;
+                this.color = `hsl(${Math.random() * 360}, 70%, 70%)`;
             }
-
-            sCanvas.addEventListener('mousedown', () => isScratching = true);
-            sCanvas.addEventListener('mouseup', () => isScratching = false);
-            sCanvas.addEventListener('mousemove', scratch);
-            sCanvas.addEventListener('touchstart', () => isScratching = true);
-            sCanvas.addEventListener('touchend', () => isScratching = false);
-            sCanvas.addEventListener('touchmove', scratch);
+            update() { this.x += this.vx; this.y += this.vy; this.alpha -= 0.02; }
+            draw() {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+            }
         }
 
-        function triggerGrandFinale() {
-            setInterval(() => {
-                burstAt({ clientX: Math.random() * width, clientY: Math.random() * height });
-            }, 300);
+        function loop() {
+            ctx.clearRect(0,0,width,height);
+            particles.forEach((p,i) => {
+                p.update(); p.draw();
+                if(p.alpha <= 0) particles.splice(i,1);
+            });
+            requestAnimationFrame(loop);
         }
-
-        renderLoop();
+        loop();
     </script>
 </body>
 </html>
