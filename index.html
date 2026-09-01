@@ -3,312 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For Polina ✨💖</title>
+    <title>Happy Birthday Polina! ✨💖🌸</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,400;1,700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --paper: #fcfaf2;
-            --rose: #ff758c;
-            --gold: #ffd700;
-            --ink: #2d3436;
-            --tape: rgba(168, 85, 247, 0.3);
+            --paper: #FAF7F2;
+            --rose: #FF758C;
+            --gold: #FFD700;
+            --purple: #A855F7;
+            --dark: #1E1B2E;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
         body {
-            background-color: #0f0e17;
-            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            background-color: var(--dark);
+            background-image: radial-gradient(rgba(255, 117, 140, 0.12) 1px, transparent 0);
+            background-size: 24px 24px;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            color: var(--ink);
+            overflow-x: hidden;
+            color: #ffffff;
+            min-height: 100vh;
         }
 
-        /* Background Visuals */
-        #canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
-        .flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 10000; opacity: 0; pointer-events: none; }
-
-        /* Stages */
-        .stage {
+        #vfxCanvas {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 10; padding: 20px;
-            transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
         }
-        .hidden { opacity: 0; transform: scale(0.8) translateY(50px); pointer-events: none; }
 
-        /* Scrapbook Container */
-        .book-page {
-            width: 100%; max-width: 450px;
+        /* Full Screen Entry Gate (Audio Enabler) */
+        #gateOverlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(18, 16, 38, 0.96);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; padding: 20px;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .gate-card {
             background: var(--paper);
-            background-image: radial-gradient(#d1ccc0 1px, transparent 0);
-            background-size: 20px 24px;
-            border-radius: 15px;
+            color: var(--dark);
             padding: 40px 30px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.2), 0 20px 50px rgba(0,0,0,0.5);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border: 4px solid #ffffff;
+            max-width: 420px;
+            width: 90%;
             position: relative;
-            border: 2px solid #e5e5e5;
+        }
+
+        .envelope-btn {
+            background: linear-gradient(135deg, var(--rose), var(--purple));
+            color: #fff; border: none;
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-size: 18px; font-weight: 700;
+            cursor: pointer; margin-top: 25px;
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.5);
+            animation: pulseBtn 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseBtn {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        /* Story Stage Setup */
+        .story-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px 20px 100px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .scrapbook-section {
+            background: var(--paper);
+            color: var(--dark);
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            position: relative;
+            border: 3px solid #ffffff;
             text-align: center;
         }
 
-        /* Tape & Decoration */
-        .tape {
-            position: absolute; width: 100px; height: 30px;
-            background: var(--tape);
+        .tape-deco {
+            position: absolute;
+            top: -14px; left: 50%;
+            transform: translateX(-50%) rotate(-1.5deg);
+            width: 110px; height: 28px;
+            background: rgba(255, 117, 140, 0.35);
             backdrop-filter: blur(2px);
-            border: 1px dashed rgba(255,255,255,0.5);
-            top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+            border: 1px dashed rgba(255, 255, 255, 0.7);
         }
 
-        /* Polaroid Aesthetic */
-        .polaroid {
-            background: white;
-            padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transform: rotate(var(--r));
+        /* Motion Film Strip Reel */
+        .auto-reel-container {
+            width: 100%;
+            overflow: hidden;
+            background: #111;
+            padding: 15px 0;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-top: 4px dashed #fff;
+            border-bottom: 4px dashed #fff;
+        }
+
+        .reel-track {
+            display: flex;
+            gap: 15px;
+            width: max-content;
+            animation: infiniteScroll 22s linear infinite;
+        }
+
+        @keyframes infiniteScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .reel-frame {
+            width: 130px; height: 170px;
+            background: #fff; padding: 6px;
+            border-radius: 4px; flex-shrink: 0;
+        }
+
+        .reel-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        /* Floating Polaroid Aesthetics */
+        .polaroid-card {
+            background: #ffffff;
+            padding: 12px 12px 28px 12px;
+            border-radius: 6px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             margin: 20px auto;
-            width: 80%;
-            border-radius: 2px;
-        }
-        .polaroid img { width: 100%; height: 250px; object-fit: cover; border: 1px solid #eee; }
-        .polaroid span { font-family: 'Caveat', cursive; font-size: 22px; margin-top: 10px; display: block; color: #444; }
-
-        /* Mascot reveal */
-        .mascot-container { width: 100%; height: 120px; position: relative; overflow: hidden; }
-        .bunny {
-            position: absolute; bottom: 0; left: -100px;
-            width: 80px; transition: left 3s ease-out;
+            transform: rotate(var(--rot));
         }
 
-        /* Film Reel */
-        .film-reel {
-            width: 100%; background: #1a1a1a;
-            padding: 20px 0; margin: 20px 0;
-            display: flex; gap: 15px; overflow-x: auto;
-            border-top: 5px dashed #444; border-bottom: 5px dashed #444;
-        }
-        .film-frame { flex-shrink: 0; width: 120px; height: 160px; background: white; padding: 5px; }
-        .film-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Camera */
-        .camera {
-            width: 150px; height: 100px; background: #333;
-            border-radius: 15px; position: relative; margin: 20px auto;
-            border: 4px solid #555; cursor: pointer;
-        }
-        .lens {
-            width: 60px; height: 60px; background: #222;
-            border-radius: 50%; border: 6px solid #444;
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        .polaroid-card img {
+            width: 100%; height: 260px;
+            object-fit: cover; border-radius: 4px;
         }
 
-        /* Buttons */
-        .btn {
-            background: linear-gradient(135deg, var(--rose), var(--accent-purple));
-            color: white; border: none; padding: 15px 40px;
-            border-radius: 50px; font-weight: 700; cursor: pointer;
-            margin-top: 20px; box-shadow: 0 5px 15px rgba(255,117,140,0.4);
-            font-family: 'Montserrat', sans-serif;
+        .polaroid-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 24px; color: #334155;
+            margin-top: 10px;
         }
 
-        /* Typing Effect */
-        .typing { font-family: 'Playfair Display', serif; font-style: italic; font-size: 28px; min-height: 80px; }
-
-        /* Reasons Jar */
-        .jar { font-size: 80px; cursor: pointer; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.2)); }
+        /* Automated Flash Effect */
+        .flash-screen {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #ffffff; opacity: 0;
+            pointer-events: none; z-index: 10000;
+            transition: opacity 0.2s ease-out;
+        }
     </style>
 </head>
 <body>
 
-    <div class="flash" id="flashOverlay"></div>
-    <canvas id="canvas"></canvas>
+    <div class="flash-screen" id="flashLayer"></div>
+    <canvas id="vfxCanvas"></canvas>
 
-    <div class="stage" id="s1">
-        <div class="book-page">
-            <div class="tape"></div>
-            <h1 style="font-family: 'Dancing Script', cursive; font-size: 45px; color: var(--rose);">Happy Birthday!</h1>
-            <p style="font-family: 'Caveat', cursive; font-size: 28px; margin: 15px 0;">To the most special girl, Polina ✨</p>
-            <button class="btn" onclick="start()">OPEN MEMORY BOOK 📖</button>
+    <!-- Entry Envelope Gate (Initializes Audio Automatically) -->
+    <div id="gateOverlay">
+        <div class="gate-card">
+            <div class="tape-deco"></div>
+            <h1 style="font-family: 'Dancing Script', cursive; font-size: 42px; color: var(--rose);">For Polina 💌</h1>
+            <p style="font-family: 'Caveat', cursive; font-size: 24px; margin-top: 10px; color: #475569;">A special birthday surprise is waiting inside...</p>
+            <button class="envelope-btn" onclick="unlockExperience()">OPEN SURPRISE 🌸</button>
         </div>
     </div>
 
-    <div class="stage hidden" id="s2">
-        <div class="book-page">
-            <div class="typing" id="typeText"></div>
-            <button class="btn" onclick="next(2,3)">CONTINUE ➔</button>
-        </div>
-    </div>
+    <!-- Continuous Scrollable Journey -->
+    <div class="story-container">
 
-    <div class="stage hidden" id="s3">
-        <div class="book-page">
-            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Someone came to see you!</h2>
-            <div class="mascot-container">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXU1bm13OHR4eHpxeHpxeHpxeHpxeHpxeHpxeHpxeHpxeHpxZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/v8x6KXvXyjkpP8t6J8/giphy.gif" class="bunny" id="bunnyMascot">
-            </div>
-            <div class="polaroid show-photo" style="--r: 3deg; opacity: 0; transition: 1s;" id="p1">
-                <img src="IMG_20260901_200944_844.jpg">
-                <span>The Cutest Smile! 🌸</span>
-            </div>
-            <button class="btn" onclick="next(3,4)">VIEW REEL 🎞️</button>
+        <!-- Header Section -->
+        <div class="scrapbook-section">
+            <div class="tape-deco"></div>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 38px; color: #be123c; font-style: italic;">Happy Birthday!</h1>
+            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: var(--purple);">Dearest Polina ✨🌸</h2>
+            <p style="font-size: 14px; color: #64748b; margin-top: 10px; line-height: 1.6;">
+                Welcome to your interactive birthday scrapbook, filled with sweet memories & endless magic!
+            </p>
         </div>
-    </div>
 
-    <div class="stage hidden" id="s4">
-        <div class="book-page" style="max-width: 500px;">
-            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Polina's Film Strip 🎞️</h2>
-            <div class="film-reel">
-                <div class="film-frame"><img src="IMG_20260901_200957_131.jpg"></div>
-                <div class="film-frame"><img src="IMG_20260901_200959_442.jpg"></div>
-                <div class="film-frame"><img src="IMG_20260901_201005_331.jpg"></div>
-                <div class="film-frame"><img src="IMG_20260901_201042_428.jpg"></div>
-                <div class="film-frame"><img src="IMG_20260901_201044_865.jpg"></div>
+        <!-- Section 1: Floating Polaroid -->
+        <div class="scrapbook-section">
+            <div class="tape-deco"></div>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 28px; color: #be123c;">A Pure Smile 🌸</h3>
+            <div class="polaroid-card" style="--rot: -2deg;">
+                <img src="IMG_20260901_200944_844.jpg" alt="Polina">
+                <div class="polaroid-caption">Brightening up every room! ✨</div>
             </div>
-            <button class="btn" onclick="next(4,5)">SNAP A PHOTO 📷</button>
         </div>
-    </div>
 
-    <div class="stage hidden" id="s5">
-        <div class="book-page">
-            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Retro Camera Moment</h2>
-            <div class="camera" onclick="snap()">
-                <div class="lens"></div>
-                <div style="position:absolute; top: 10px; right: 20px; width: 20px; height: 10px; background: red; border-radius: 2px;"></div>
-            </div>
-            <div id="snapResult" style="display:none; margin-top: 20px;">
-                <div class="polaroid" style="--r:-2deg;">
-                    <img src="IMG_20260901_201054_818.jpg">
-                    <span>Captured your magic! ✨</span>
+        <!-- Section 2: Automated Infinite Motion Reel -->
+        <div class="scrapbook-section">
+            <div class="tape-deco"></div>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 28px; color: var(--purple);">Memory Film Roll 🎞️</h3>
+            <p style="font-size: 12px; color: #64748b;">Automated Motion Reel</p>
+            
+            <div class="auto-reel-container">
+                <div class="reel-track">
+                    <div class="reel-frame"><img src="IMG_20260901_200957_131.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_200959_442.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_201005_331.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_201042_428.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_201044_865.jpg"></div>
+                    <!-- Cloned frames for smooth infinite motion -->
+                    <div class="reel-frame"><img src="IMG_20260901_200957_131.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_200959_442.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_201005_331.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_201042_428.jpg"></div>
+                    <div class="reel-frame"><img src="IMG_20260901_201044_865.jpg"></div>
                 </div>
             </div>
-            <button class="btn" onclick="next(5,6)">THE JAR 🫙</button>
         </div>
-    </div>
 
-    <div class="stage hidden" id="s6">
-        <div class="book-page">
-            <h2 style="font-family: 'Caveat', cursive; font-size: 32px;">Reasons Polina is Special</h2>
-            <div class="jar" onclick="popReason()">🫙</div>
-            <div id="reasonNote" style="font-family: 'Caveat', cursive; font-size: 26px; color: var(--rose); min-height: 40px; margin-top: 10px;">Tap the jar!</div>
-            <button class="btn" onclick="next(6,7)">GRAND FINALE 🎉</button>
-        </div>
-    </div>
-
-    <div class="stage hidden" id="s7">
-        <div class="book-page">
-            <h2 style="font-family: 'Dancing Script', cursive; font-size: 40px; color: var(--rose);">Happy Birthday Polina!</h2>
-            <div class="polaroid" style="--r: 0deg; width: 90%;">
-                <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg">
-                <span>The Birthday Queen 👑</span>
+        <!-- Section 3: Retro Snap Photo -->
+        <div class="scrapbook-section">
+            <div class="tape-deco"></div>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 28px; color: #0284c7;">Captured Moments 📸</h3>
+            <div class="polaroid-card" style="--rot: 2.5deg;">
+                <img src="IMG_20260901_201054_818.jpg" alt="Polina">
+                <div class="polaroid-caption">Unforgettable charm! 💫</div>
             </div>
-            <p style="font-size: 14px; line-height: 1.5;">May your life be as aesthetic and beautiful as this book! You deserve all the love. 💖</p>
-            <div style="font-family: 'Caveat', cursive; font-size: 28px; margin-top: 10px;">— With Love ✨</div>
+            <div class="polaroid-card" style="--rot: -1.8deg;">
+                <img src="IMG_20260901_201059_484.jpg" alt="Polina">
+                <div class="polaroid-caption">Always genuine & sweet ✨</div>
+            </div>
         </div>
+
+        <!-- Section 4: Grand Collage & Finale Message -->
+        <div class="scrapbook-section">
+            <div class="tape-deco"></div>
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 38px; color: #be123c;">Happy Birthday Polina! 🎉</h2>
+            <p style="font-size: 14px; line-height: 1.6; color: #334155; margin: 15px 0;">
+                May your upcoming year be packed with laughter, endless happiness, incredible journeys, and all the love in the world! 💖
+            </p>
+            <div class="polaroid-card" style="--rot: 0deg;">
+                <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg" alt="Polina">
+                <div class="polaroid-caption">Best Day Ever! 👑🌸</div>
+            </div>
+        </div>
+
     </div>
 
-    <audio id="music" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop></audio>
+    <!-- Audio Element Direct GitHub Path -->
+    <audio id="bgSong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop preload="auto"></audio>
 
     <script>
-        const music = document.getElementById('music');
-        const flash = document.getElementById('flashOverlay');
+        /* Audio & Entrance Logic */
+        const audio = document.getElementById('bgSong');
 
-        function start() {
-            music.play();
-            next(1,2);
-            type();
-        }
-
-        function next(curr, next) {
-            document.getElementById('s'+curr).classList.add('hidden');
+        function unlockExperience() {
+            // Play Audio
+            audio.play().catch(err => console.log("Audio play blocked:", err));
+            
+            // Fade out Gate
+            const gate = document.getElementById('gateOverlay');
+            gate.style.opacity = '0';
+            gate.style.transform = 'scale(1.1)';
             setTimeout(() => {
-                document.getElementById('s'+next).classList.remove('hidden');
-                if(next === 3) startMascot();
-            }, 600);
+                gate.style.display = 'none';
+            }, 1000);
+
+            // Trigger Flash & Confetti Burst
+            triggerFlash();
+            burstParticles();
         }
 
-        function type() {
-            const lines = ["Today is not a normal day...", "The universe is celebrating...", "Because Polina was born! 🌸"];
-            let i = 0, j = 0, text = "";
-            const el = document.getElementById('typeText');
-            function step() {
-                if (i < lines.length) {
-                    if (j < lines[i].length) {
-                        text += lines[i][j];
-                        el.innerHTML = text;
-                        j++;
-                        setTimeout(step, 50);
-                    } else {
-                        text += "<br>";
-                        i++; j = 0;
-                        setTimeout(step, 1000);
-                    }
-                }
-            }
-            step();
+        function triggerFlash() {
+            const flash = document.getElementById('flashLayer');
+            flash.style.opacity = '1';
+            setTimeout(() => { flash.style.opacity = '0'; }, 250);
         }
 
-        function startMascot() {
-            const b = document.getElementById('bunnyMascot');
-            const p = document.getElementById('p1');
-            setTimeout(() => {
-                b.style.left = "40%";
-                setTimeout(() => {
-                    p.style.opacity = "1";
-                    p.style.transform = "scale(1) rotate(3deg)";
-                }, 1500);
-            }, 500);
-        }
-
-        function snap() {
-            flash.style.opacity = "1";
-            setTimeout(() => flash.style.opacity = "0", 100);
-            document.getElementById('snapResult').style.display = "block";
-            for(let i=0; i<30; i++) particles.push(new Particle(window.innerWidth/2, window.innerHeight/2));
-        }
-
-        const reasons = ["Your beautiful energy ✨", "Your kind heart 💖", "The way you smile 🌸", "How special you are 💫", "Your pure soul 🌷"];
-        let rIdx = 0;
-        function popReason() {
-            document.getElementById('reasonNote').innerText = reasons[rIdx % reasons.length];
-            rIdx++;
-            for(let i=0; i<15; i++) particles.push(new Particle(window.innerWidth/2, window.innerHeight/2));
-        }
-
-        /* Particle System */
-        const canvas = document.getElementById('canvas');
+        /* Particle Visual Engine */
+        const canvas = document.getElementById('vfxCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
         let particles = [];
 
-        class Particle {
-            constructor(x, y) {
-                this.x = x; this.y = y;
-                this.size = Math.random() * 8 + 4;
-                this.vx = (Math.random() - 0.5) * 10;
-                this.vy = (Math.random() - 0.5) * 10;
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class HeartParticle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = height + 20;
+                this.size = Math.random() * 14 + 10;
+                this.vy = -Math.random() * 3 - 1.5;
+                this.vx = (Math.random() - 0.5) * 1.5;
                 this.alpha = 1;
-                this.color = `hsl(${Math.random() * 360}, 70%, 70%)`;
+                this.char = ['🌸', '✨', '💖', '🌷', '💫'][Math.floor(Math.random() * 5)];
             }
-            update() { this.x += this.vx; this.y += this.vy; this.alpha -= 0.02; }
+            update() {
+                this.y += this.vy;
+                this.x += this.vx;
+                if(this.y < -20) this.alpha = 0;
+            }
             draw() {
+                ctx.save();
                 ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = this.color;
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+                ctx.font = `${this.size}px Montserrat`;
+                ctx.fillText(this.char, this.x, this.y);
+                ctx.restore();
             }
         }
 
-        function loop() {
-            ctx.clearRect(0,0,width,height);
-            particles.forEach((p,i) => {
-                p.update(); p.draw();
-                if(p.alpha <= 0) particles.splice(i,1);
-            });
-            requestAnimationFrame(loop);
+        function burstParticles() {
+            for(let i=0; i<30; i++) {
+                particles.push(new HeartParticle());
+            }
         }
-        loop();
+
+        function renderLoop() {
+            ctx.clearRect(0, 0, width, height);
+            if(Math.random() < 0.08) particles.push(new HeartParticle());
+
+            particles.forEach((p, idx) => {
+                p.update();
+                p.draw();
+                if(p.alpha <= 0) particles.splice(idx, 1);
+            });
+            requestAnimationFrame(renderLoop);
+        }
+        renderLoop();
     </script>
 </body>
 </html>
