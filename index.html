@@ -1,232 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Polina! ✨💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-    
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            background: #0f0c1b;
-            color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Polina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Playfair+Display:ital,wght@0,600;1,600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0c0a;
+    --emerald:#0f2419;
+    --emerald2:#183327;
+    --gold:#cda965;
+    --gold-bright:#e8caa0;
+    --cream:#f6efe1;
+    --wine:#3d1220;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:radial-gradient(circle at 50% 0%, var(--emerald2) 0%, var(--black) 65%);
+    color:var(--cream);
+    font-family:'Cormorant Garamond', serif;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
 
-        /* Full Screen Interactive Overlay */
-        #startGate {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(15, 12, 27, 0.98);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+  /* ---------- Start gate ---------- */
+  #startGate{
+    position:fixed; inset:0; z-index:9999;
+    background:radial-gradient(circle at 50% 30%, var(--emerald2), var(--black) 75%);
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:20px;
+  }
+  .card{
+    background:linear-gradient(180deg,#0f1512,#0a0c0a);
+    color:var(--cream);
+    padding:44px 28px; border-radius:4px;
+    max-width:380px; width:90%;
+    box-shadow:0 30px 70px rgba(0,0,0,.6);
+    border:1px solid var(--gold);
+    position:relative;
+  }
+  .card::before, .card::after{
+    content:''; position:absolute; width:26px; height:26px;
+    border:1px solid var(--gold);
+  }
+  .card::before{top:10px; left:10px; border-right:none; border-bottom:none;}
+  .card::after{bottom:10px; right:10px; border-left:none; border-top:none;}
+  .card .eyebrow{font-family:'Cormorant Garamond',serif; letter-spacing:4px; font-size:11px; color:var(--gold); text-transform:uppercase;}
+  .card h1{font-family:'Playfair Display',serif; font-style:italic; font-weight:600; font-size:30px; color:var(--gold-bright); margin-top:10px;}
+  .card h2{font-family:'Caveat',cursive; font-size:28px; color:var(--cream); margin-top:2px;}
+  .card p{font-size:16px; color:#c9c2b3; margin-top:14px; line-height:1.55;}
+  .play-btn{
+    background:transparent;
+    color:var(--gold-bright); border:1px solid var(--gold); padding:14px 30px;
+    font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+    cursor:pointer; margin-top:24px;
+  }
+  .play-btn:active{background:var(--gold); color:var(--black);}
 
-        .card {
-            background: #fffdf9;
-            color: #1e1b2e;
-            padding: 35px 25px;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 4px solid #ffffff;
-        }
+  #soundHint{
+    position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+    background:var(--cream); color:var(--black); font-size:12.5px; font-weight:600;
+    padding:10px 18px; border-radius:2px; box-shadow:0 8px 20px rgba(0,0,0,.4);
+    display:none; z-index:9998; cursor:pointer; letter-spacing:.5px;
+  }
 
-        .play-btn {
-            background: linear-gradient(135deg, #ff758c, #a855f7);
-            color: #fff;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.4);
-        }
+  #musicToggle{
+    position:fixed; top:16px; right:16px; z-index:500;
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(0,0,0,.35); backdrop-filter:blur(6px);
+    border:1px solid var(--gold);
+    color:var(--gold-bright); font-size:16px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
 
-        /* Scrapbook Page Layout */
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 20px 15px 80px 15px;
-        }
+  #progressWrap{position:fixed; top:0; left:0; width:100%; height:3px; z-index:500; background:rgba(255,255,255,.06);}
+  #progressBar{height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-bright)); transition:width .1s;}
 
-        .section-box {
-            background: #fdfbf7;
-            color: #2d3748;
-            border-radius: 18px;
-            padding: 25px 18px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center;
-            position: relative;
-        }
+  .container{max-width:480px; margin:0 auto; padding:70px 18px 100px;}
 
-        .tape {
-            position: absolute;
-            top: -12px; left: 50%;
-            transform: translateX(-50%) rotate(-1deg);
-            width: 100px; height: 24px;
-            background: rgba(255, 117, 140, 0.4);
-            border: 1px dashed rgba(255,255,255,0.8);
-        }
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-        /* Smooth Motion Video Reel */
-        .marquee-box {
-            overflow: hidden;
-            width: 100%;
-            background: #111;
-            padding: 12px 0;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-top: 3px dashed #fff;
-            border-bottom: 3px dashed #fff;
-        }
+  .divider{width:60px; height:1px; background:var(--gold); margin:0 auto 34px; opacity:.6;}
 
-        .marquee-track {
-            display: flex;
-            gap: 12px;
-            width: max-content;
-            animation: reelMove 18s linear infinite;
-        }
+  .section-box{
+    background:linear-gradient(180deg, rgba(246,239,225,.03), rgba(246,239,225,0));
+    border:1px solid rgba(205,169,101,.35);
+    padding:34px 22px; margin-bottom:40px;
+    text-align:center; position:relative;
+  }
+  .section-box::before, .section-box::after{
+    content:''; position:absolute; width:16px; height:16px; border:1px solid var(--gold);
+  }
+  .section-box::before{top:-1px; left:-1px; border-right:none; border-bottom:none;}
+  .section-box::after{bottom:-1px; right:-1px; border-left:none; border-top:none;}
 
-        @keyframes reelMove {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+  .eyebrow-script{
+    font-family:'Cormorant Garamond',serif; letter-spacing:4px; font-size:11px;
+    color:var(--gold); text-transform:uppercase; margin-bottom:14px;
+  }
 
-        .frame {
-            width: 120px; height: 160px;
-            background: #fff; padding: 5px;
-            border-radius: 4px; flex-shrink: 0;
-        }
+  .hero-title{font-family:'Playfair Display',serif; font-style:italic; font-weight:600; font-size:36px; color:var(--gold-bright); text-align:center; line-height:1.3;}
+  .hero-sub{font-family:'Caveat',cursive; font-size:23px; color:var(--cream); text-align:center; margin-top:6px; opacity:.85;}
+  #typewriter{
+    font-size:17px; color:#cfc7b6; text-align:center; min-height:80px;
+    max-width:340px; margin:26px auto 0; line-height:1.7; font-style:italic;
+  }
+  .cursor{display:inline-block; width:1px; background:var(--gold); animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
 
-        .frame img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
+  .marquee-box{
+    overflow:hidden; width:100%; background:var(--black); padding:14px 0;
+    margin:20px 0; border-top:1px solid var(--gold); border-bottom:1px solid var(--gold);
+  }
+  .marquee-track{display:flex; gap:14px; width:max-content; animation:reelMove 22s linear infinite;}
+  .marquee-box:hover .marquee-track{animation-play-state:paused;}
+  @keyframes reelMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  .frame{width:118px; height:158px; background:var(--gold); padding:4px; flex-shrink:0;}
+  .frame img{width:100%; height:100%; object-fit:cover;}
 
-        /* Photo Polaroid */
-        .polaroid {
-            background: #fff;
-            padding: 10px 10px 25px 10px;
-            border-radius: 4px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            margin: 15px auto;
-            transform: rotate(var(--r));
-        }
+  .gallery{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+  .flip-card{background:transparent; height:170px; perspective:900px; cursor:pointer;}
+  .flip-inner{position:relative; width:100%; height:100%; text-align:center; transition:transform .7s; transform-style:preserve-3d;}
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-front,.flip-back{position:absolute; width:100%; height:100%; backface-visibility:hidden; overflow:hidden; border:1px solid var(--gold);}
+  .flip-front img{width:100%; height:100%; object-fit:cover;}
+  .flip-back{
+    background:linear-gradient(135deg,var(--wine),var(--emerald2));
+    transform:rotateY(180deg); display:flex; align-items:center; justify-content:center;
+    padding:12px; font-family:'Caveat',cursive; font-size:19px; color:var(--gold-bright); line-height:1.3;
+  }
+  .flip-hint{font-size:11px; color:#8a8371; margin-top:10px; letter-spacing:1px;}
 
-        .polaroid img {
-            width: 100%; height: 250px;
-            object-fit: cover;
-        }
+  #balloonField{position:relative; height:280px; margin-top:14px; overflow:hidden; border:1px solid var(--gold); background:radial-gradient(circle at 50% 100%, var(--emerald2), var(--black));}
+  .balloon{
+    position:absolute; bottom:-60px; width:50px; height:64px; border-radius:50% 50% 46% 46%;
+    display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer;
+    animation:floatUp linear forwards; box-shadow:inset -6px -6px 12px rgba(0,0,0,.25);
+  }
+  .balloon::after{content:''; position:absolute; bottom:-9px; left:50%; transform:translateX(-50%); width:1px; height:14px; background:rgba(255,255,255,.4);}
+  @keyframes floatUp{to{transform:translateY(-330px);}}
+  #balloonMsg{margin-top:12px; font-family:'Caveat',cursive; font-size:20px; color:var(--gold-bright); min-height:26px;}
+  #balloonProgress{font-size:11px; color:#8a8371; margin-top:4px; letter-spacing:1px;}
 
-        .polaroid-text {
-            font-family: 'Caveat', cursive;
-            font-size: 22px;
-            color: #334155;
-            margin-top: 8px;
-        }
-    </style>
+  #envelope{width:220px; height:150px; margin:20px auto 8px; position:relative; cursor:pointer;}
+  .env-body{position:absolute; inset:0; background:linear-gradient(135deg,var(--emerald2),var(--black)); border:1px solid var(--gold);}
+  .env-flap{
+    position:absolute; top:0; left:0; width:100%; height:0; border-left:110px solid transparent;
+    border-right:110px solid transparent; border-top:75px solid var(--wine);
+    transform-origin:top; transition:transform .6s ease; z-index:3;
+  }
+  #envelope.open .env-flap{transform:rotateX(180deg);}
+  .env-seal{
+    position:absolute; top:58px; left:50%; transform:translate(-50%,-50%); z-index:4;
+    width:34px; height:34px; border-radius:50%; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:15px; color:var(--black); box-shadow:0 4px 10px rgba(0,0,0,.4);
+  }
+  #envelope.open .env-seal{display:none;}
+  .letter-hint{font-size:12px; color:#8a8371; margin-top:12px; letter-spacing:1px;}
+  #letterText{
+    display:none; text-align:left; font-family:'Caveat',cursive; font-size:20px; line-height:1.65;
+    color:var(--cream); margin-top:18px; background:rgba(246,239,225,.04); border:1px solid rgba(205,169,101,.4); padding:20px;
+  }
+  #envelope.open ~ #letterText{display:block;}
+
+  .polaroid{
+    background:var(--gold); padding:10px 10px 24px 10px; margin:18px auto;
+    max-width:260px;
+  }
+  .polaroid img{width:100%; height:230px; object-fit:cover;}
+  .polaroid-text{font-family:'Caveat',cursive; font-size:20px; color:var(--black); margin-top:8px;}
+
+  #finale{text-align:center; padding-top:10px;}
+  #finale .hero-title{font-size:32px;}
+  .replay-btn{
+    background:transparent; border:1px solid var(--gold); color:var(--gold-bright);
+    padding:13px 28px; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-top:22px; cursor:pointer;
+  }
+
+  canvas#confettiCanvas{position:fixed; inset:0; pointer-events:none; z-index:9997;}
+</style>
 </head>
 <body>
 
-    <!-- Start Overlay (Unlocks Browser Audio Policy) -->
-    <div id="startGate">
-        <div class="card">
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #be123c;">Happy Birthday!</h1>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 30px; color: #a855f7; margin-top: 5px;">Dear Polina 🌸✨</h2>
-            <p style="font-size: 13px; color: #64748b; margin-top: 10px;">Tap below to begin the birthday story & song!</p>
-            <button class="play-btn" onclick="openBirthdayPage()">START EXPERIENCE 🎵</button>
-        </div>
+<div id="progressWrap"><div id="progressBar"></div></div>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="startGate">
+  <div class="card">
+    <div class="eyebrow">an invitation</div>
+    <h1>Happy Birthday</h1>
+    <h2>Dear Polina 🌸</h2>
+    <p>A little journal made only for you — photographs, memories and a few small surprises.<br>Take three quiet minutes, and begin.</p>
+    <button class="play-btn" onclick="openBirthdayPage()">Begin the Experience</button>
+  </div>
+</div>
+
+<div id="soundHint" onclick="forcePlay()">Tap here to turn the music on</div>
+<div id="musicToggle" onclick="toggleMusic()">♪</div>
+
+<div class="container">
+
+  <div class="section-box reveal">
+    <div class="eyebrow-script">for someone special</div>
+    <div class="hero-title">Polina's<br>Birthday Journal</div>
+    <div class="hero-sub">made with love, just for you</div>
+    <div id="typewriter"><span id="twText"></span><span class="cursor">&nbsp;</span></div>
+  </div>
+
+  <div class="section-box reveal">
+    <div class="eyebrow-script">memory reel</div>
+    <div class="marquee-box">
+      <div class="marquee-track">
+        <div class="frame"><img src="IMG_20260901_200944_844.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_200957_131.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_200959_442.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_201005_331.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_201042_428.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_200944_844.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_200957_131.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_200959_442.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_201005_331.jpg" alt=""></div>
+        <div class="frame"><img src="IMG_20260901_201042_428.jpg" alt=""></div>
+      </div>
     </div>
+    <div class="flip-hint">it loops — enjoy the ride</div>
+  </div>
 
-    <!-- Main Scrapbook Content -->
-    <div class="container">
-
-        <div class="section-box">
-            <div class="tape"></div>
-            <h1 style="font-family: 'Caveat', cursive; font-size: 36px; color: #be123c;">For Polina ✨</h1>
-            <p style="font-size: 13.5px; color: #64748b; line-height: 1.5; margin-top: 8px;">
-                Wishing you the most magical birthday ever! Here is a digital journal of memories.
-            </p>
+  <div class="section-box reveal">
+    <div class="eyebrow-script">tap a photograph</div>
+    <div class="gallery">
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="IMG_20260901_201044_865.jpg" alt=""></div>
+          <div class="flip-back">you make ordinary days feel special</div>
         </div>
-
-        <!-- Motion Reel Section -->
-        <div class="section-box">
-            <div class="tape"></div>
-            <h3 style="font-family: 'Caveat', cursive; font-size: 26px; color: #a855f7;">Smooth Memory Reel 🎞️</h3>
-            
-            <div class="marquee-box">
-                <div class="marquee-track">
-                    <div class="frame"><img src="IMG_20260901_200944_844.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_200957_131.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_200959_442.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_201005_331.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_201042_428.jpg"></div>
-                    <!-- Duplicate for infinite loop -->
-                    <div class="frame"><img src="IMG_20260901_200944_844.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_200957_131.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_200959_442.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_201005_331.jpg"></div>
-                    <div class="frame"><img src="IMG_20260901_201042_428.jpg"></div>
-                </div>
-            </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="IMG_20260901_201054_818.jpg" alt=""></div>
+          <div class="flip-back">always glowing, always you</div>
         </div>
-
-        <!-- Polaroid Highlights -->
-        <div class="section-box">
-            <div class="tape"></div>
-            <div class="polaroid" style="--r: -2deg;">
-                <img src="IMG_20260901_201044_865.jpg">
-                <div class="polaroid-text">Wonderful Memories 🌸</div>
-            </div>
-            <div class="polaroid" style="--r: 2deg;">
-                <img src="IMG_20260901_201054_818.jpg">
-                <div class="polaroid-text">Always Glowing ✨</div>
-            </div>
-            <div class="polaroid" style="--r: -1.5deg;">
-                <img src="IMG_20260901_201059_484.jpg">
-                <div class="polaroid-text">Stay Amazing! 💖</div>
-            </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="IMG_20260901_201059_484.jpg" alt=""></div>
+          <div class="flip-back">this smile deserves the world</div>
         </div>
-
-        <!-- Final Greeting -->
-        <div class="section-box">
-            <div class="tape"></div>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: #be123c;">Have A Blessed Year! 👑</h2>
-            <div class="polaroid" style="--r: 0deg;">
-                <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg">
-                <div class="polaroid-text">Polina ✨</div>
-            </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg" alt=""></div>
+          <div class="flip-back">happy birthday, Polina</div>
         </div>
-
+      </div>
     </div>
+    <div class="flip-hint">tap each card to flip it</div>
+  </div>
 
-    <!-- Audio Element -->
-    <audio id="mySong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop></audio>
+  <div class="section-box reveal">
+    <div class="eyebrow-script">pop the balloons</div>
+    <div id="balloonField"></div>
+    <div id="balloonMsg"></div>
+    <div id="balloonProgress">0 / 6 popped</div>
+  </div>
 
-    <script>
-        function openBirthdayPage() {
-            var audio = document.getElementById('mySong');
-            audio.play().catch(function(error) {
-                console.log("Playback failed:", error);
-            });
-            
-            var gate = document.getElementById('startGate');
-            gate.style.display = 'none';
-        }
-    </script>
+  <div class="section-box reveal">
+    <div class="eyebrow-script">one more thing</div>
+    <div id="envelope" onclick="openEnvelope()">
+      <div class="env-body"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">✒</div>
+    </div>
+    <div class="letter-hint">tap the envelope</div>
+    <div id="letterText">
+      Dear Polina,<br><br>
+      On your special day, I just want you to know how much your friendship means.
+      Every memory in this little page is a reminder of how much fun, comfort and laughter
+      you bring into my life.<br><br>
+      Here's to another year of your kindness, your energy, and your amazing self.
+      Happy Birthday — I hope this year gives you everything you deserve.
+    </div>
+  </div>
+
+  <div class="section-box reveal" id="finale">
+    <div class="hero-title">Have A Blessed Year</div>
+    <div class="polaroid">
+      <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg" alt="">
+      <div class="polaroid-text">Polina ✨</div>
+    </div>
+    <button class="replay-btn" onclick="celebrate(true)">Celebrate Again</button>
+  </div>
+
+</div>
+
+<audio id="mySong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop preload="auto"></audio>
+
+<script>
+const audio = document.getElementById('mySong');
+const soundHint = document.getElementById('soundHint');
+const musicToggle = document.getElementById('musicToggle');
+let musicOn = false;
+
+function tryPlay(){
+  const p = audio.play();
+  if(p !== undefined){
+    p.then(()=>{ musicOn = true; soundHint.style.display='none'; musicToggle.textContent='♪'; })
+     .catch(()=>{ soundHint.style.display='block'; musicToggle.textContent='✕'; });
+  }
+}
+function forcePlay(){ audio.muted = false; tryPlay(); }
+function toggleMusic(){
+  if(musicOn){ audio.pause(); musicOn=false; musicToggle.textContent='✕'; }
+  else { tryPlay(); }
+}
+function openBirthdayPage(){
+  document.getElementById('startGate').style.display='none';
+  tryPlay();
+  document.body.addEventListener('click', function once(){ if(!musicOn) tryPlay(); }, {once:true});
+  startStory();
+}
+
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.2});
+revealEls.forEach(el=>io.observe(el));
+
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+});
+
+const lines = [
+  "Kisi khaas insaan ke liye...",
+  "yeh chhota sa digital surprise banaya hai.",
+  "Scroll karo, thoda khelo, aur end tak zaroor jaana."
+];
+function startStory(){
+  const el = document.getElementById('twText');
+  let li = 0, ci = 0;
+  function type(){
+    if(li >= lines.length) return;
+    if(ci <= lines[li].length){
+      el.textContent = lines.slice(0,li).join(' ') + (li>0?' ':'') + lines[li].slice(0,ci);
+      ci++; setTimeout(type, 35);
+    } else { li++; ci=0; setTimeout(type, 500); }
+  }
+  type();
+}
+
+const balloonWords = ['Happy','Birthday','Polina','you','are','loved'];
+const balloonColors = ['#cda965','#3d1220','#183327','#8a6d3b','#5c2233','#0f2419'];
+let popped = 0;
+const field = document.getElementById('balloonField');
+
+function spawnBalloon(i){
+  const b = document.createElement('div');
+  b.className = 'balloon';
+  b.style.left = (8 + Math.random()*78) + '%';
+  b.style.background = balloonColors[i % balloonColors.length];
+  b.style.animationDuration = (6 + Math.random()*3) + 's';
+  b.dataset.word = balloonWords[i];
+  b.textContent = '🎈';
+  b.addEventListener('click', ()=>popBalloon(b), {once:true});
+  field.appendChild(b);
+  b.addEventListener('animationend', ()=>{ if(b.parentNode) b.remove(); });
+}
+function popBalloon(b){
+  const word = b.dataset.word;
+  b.remove();
+  popped++;
+  document.getElementById('balloonMsg').textContent += word + ' ';
+  document.getElementById('balloonProgress').textContent = popped + ' / 6 popped';
+  if(popped === balloonWords.length){ setTimeout(()=>celebrate(false), 300); }
+}
+setInterval(()=>{ if(popped < balloonWords.length){ spawnBalloon(Math.floor(Math.random()*balloonWords.length)); } }, 1100);
+
+let letterOpened = false;
+function openEnvelope(){
+  const env = document.getElementById('envelope');
+  env.classList.add('open');
+  if(!letterOpened){ letterOpened = true; setTimeout(()=>celebrate(false), 400); }
+}
+
+const canvas = document.getElementById('confettiCanvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let particles = [];
+function celebrate(big){
+  const count = big ? 140 : 60;
+  for(let i=0;i<count;i++){
+    particles.push({
+      x: canvas.width/2 + (Math.random()-0.5)*(big?canvas.width:120),
+      y: big ? canvas.height*0.3 : -10,
+      vx: (Math.random()-0.5)*6,
+      vy: Math.random()*-6 - 2,
+      g: 0.18,
+      size: 5+Math.random()*5,
+      color: balloonColors[Math.floor(Math.random()*balloonColors.length)],
+      rot: Math.random()*360,
+      vr: (Math.random()-0.5)*10,
+      life: 0
+    });
+  }
+  if(!confettiRunning) runConfetti();
+}
+let confettiRunning = false;
+function runConfetti(){
+  confettiRunning = true;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life++;
+    ctx.save();
+    ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+    ctx.restore();
+  });
+  particles = particles.filter(p=> p.y < canvas.height + 40 && p.life < 260);
+  if(particles.length){ requestAnimationFrame(runConfetti); }
+  else { confettiRunning = false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+}
+
+const finaleObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ celebrate(true); finaleObs.disconnect(); } });
+},{threshold:.6});
+finaleObs.observe(document.getElementById('finale'));
+</script>
 </body>
-</html>
+          </html>
