@@ -3,351 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Polina! ✨💖🌸</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,400;1,700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Happy Birthday Polina! ✨💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --paper: #FAF7F2;
-            --rose: #FF758C;
-            --gold: #FFD700;
-            --purple: #A855F7;
-            --dark: #1E1B2E;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            background-color: var(--dark);
-            background-image: radial-gradient(rgba(255, 117, 140, 0.12) 1px, transparent 0);
-            background-size: 24px 24px;
+            background: #0f0c1b;
+            color: #ffffff;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            color: #ffffff;
             min-height: 100vh;
         }
 
-        #vfxCanvas {
+        /* Full Screen Interactive Overlay */
+        #startGate {
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Full Screen Entry Gate (Audio Enabler) */
-        #gateOverlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(18, 16, 38, 0.96);
-            backdrop-filter: blur(15px);
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(15, 12, 27, 0.98);
             z-index: 9999;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center; padding: 20px;
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .gate-card {
-            background: var(--paper);
-            color: var(--dark);
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            border: 4px solid #ffffff;
-            max-width: 420px;
-            width: 90%;
-            position: relative;
-        }
-
-        .envelope-btn {
-            background: linear-gradient(135deg, var(--rose), var(--purple));
-            color: #fff; border: none;
-            padding: 18px 36px;
-            border-radius: 50px;
-            font-size: 18px; font-weight: 700;
-            cursor: pointer; margin-top: 25px;
-            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.5);
-            animation: pulseBtn 1.8s infinite ease-in-out;
-        }
-
-        @keyframes pulseBtn {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-
-        /* Story Stage Setup */
-        .story-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 30px 20px 100px 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .scrapbook-section {
-            background: var(--paper);
-            color: var(--dark);
-            border-radius: 20px;
-            padding: 30px 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            position: relative;
-            border: 3px solid #ffffff;
-            text-align: center;
-        }
-
-        .tape-deco {
-            position: absolute;
-            top: -14px; left: 50%;
-            transform: translateX(-50%) rotate(-1.5deg);
-            width: 110px; height: 28px;
-            background: rgba(255, 117, 140, 0.35);
-            backdrop-filter: blur(2px);
-            border: 1px dashed rgba(255, 255, 255, 0.7);
-        }
-
-        /* Motion Film Strip Reel */
-        .auto-reel-container {
-            width: 100%;
-            overflow: hidden;
-            background: #111;
-            padding: 15px 0;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-top: 4px dashed #fff;
-            border-bottom: 4px dashed #fff;
-        }
-
-        .reel-track {
             display: flex;
-            gap: 15px;
-            width: max-content;
-            animation: infiniteScroll 22s linear infinite;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
         }
 
-        @keyframes infiniteScroll {
+        .card {
+            background: #fffdf9;
+            color: #1e1b2e;
+            padding: 35px 25px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 4px solid #ffffff;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #ff758c, #a855f7);
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.4);
+        }
+
+        /* Scrapbook Page Layout */
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px 15px 80px 15px;
+        }
+
+        .section-box {
+            background: #fdfbf7;
+            color: #2d3748;
+            border-radius: 18px;
+            padding: 25px 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .tape {
+            position: absolute;
+            top: -12px; left: 50%;
+            transform: translateX(-50%) rotate(-1deg);
+            width: 100px; height: 24px;
+            background: rgba(255, 117, 140, 0.4);
+            border: 1px dashed rgba(255,255,255,0.8);
+        }
+
+        /* Smooth Motion Video Reel */
+        .marquee-box {
+            overflow: hidden;
+            width: 100%;
+            background: #111;
+            padding: 12px 0;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-top: 3px dashed #fff;
+            border-bottom: 3px dashed #fff;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 12px;
+            width: max-content;
+            animation: reelMove 18s linear infinite;
+        }
+
+        @keyframes reelMove {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        .reel-frame {
-            width: 130px; height: 170px;
-            background: #fff; padding: 6px;
+        .frame {
+            width: 120px; height: 160px;
+            background: #fff; padding: 5px;
             border-radius: 4px; flex-shrink: 0;
         }
 
-        .reel-frame img {
+        .frame img {
             width: 100%; height: 100%;
             object-fit: cover;
         }
 
-        /* Floating Polaroid Aesthetics */
-        .polaroid-card {
-            background: #ffffff;
-            padding: 12px 12px 28px 12px;
-            border-radius: 6px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            margin: 20px auto;
-            transform: rotate(var(--rot));
+        /* Photo Polaroid */
+        .polaroid {
+            background: #fff;
+            padding: 10px 10px 25px 10px;
+            border-radius: 4px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin: 15px auto;
+            transform: rotate(var(--r));
         }
 
-        .polaroid-card img {
-            width: 100%; height: 260px;
-            object-fit: cover; border-radius: 4px;
+        .polaroid img {
+            width: 100%; height: 250px;
+            object-fit: cover;
         }
 
-        .polaroid-caption {
+        .polaroid-text {
             font-family: 'Caveat', cursive;
-            font-size: 24px; color: #334155;
-            margin-top: 10px;
-        }
-
-        /* Automated Flash Effect */
-        .flash-screen {
-            position: fixed; top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: #ffffff; opacity: 0;
-            pointer-events: none; z-index: 10000;
-            transition: opacity 0.2s ease-out;
+            font-size: 22px;
+            color: #334155;
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
 
-    <div class="flash-screen" id="flashLayer"></div>
-    <canvas id="vfxCanvas"></canvas>
-
-    <!-- Entry Envelope Gate (Initializes Audio Automatically) -->
-    <div id="gateOverlay">
-        <div class="gate-card">
-            <div class="tape-deco"></div>
-            <h1 style="font-family: 'Dancing Script', cursive; font-size: 42px; color: var(--rose);">For Polina 💌</h1>
-            <p style="font-family: 'Caveat', cursive; font-size: 24px; margin-top: 10px; color: #475569;">A special birthday surprise is waiting inside...</p>
-            <button class="envelope-btn" onclick="unlockExperience()">OPEN SURPRISE 🌸</button>
+    <!-- Start Overlay (Unlocks Browser Audio Policy) -->
+    <div id="startGate">
+        <div class="card">
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #be123c;">Happy Birthday!</h1>
+            <h2 style="font-family: 'Caveat', cursive; font-size: 30px; color: #a855f7; margin-top: 5px;">Dear Polina 🌸✨</h2>
+            <p style="font-size: 13px; color: #64748b; margin-top: 10px;">Tap below to begin the birthday story & song!</p>
+            <button class="play-btn" onclick="openBirthdayPage()">START EXPERIENCE 🎵</button>
         </div>
     </div>
 
-    <!-- Continuous Scrollable Journey -->
-    <div class="story-container">
+    <!-- Main Scrapbook Content -->
+    <div class="container">
 
-        <!-- Header Section -->
-        <div class="scrapbook-section">
-            <div class="tape-deco"></div>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 38px; color: #be123c; font-style: italic;">Happy Birthday!</h1>
-            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: var(--purple);">Dearest Polina ✨🌸</h2>
-            <p style="font-size: 14px; color: #64748b; margin-top: 10px; line-height: 1.6;">
-                Welcome to your interactive birthday scrapbook, filled with sweet memories & endless magic!
+        <div class="section-box">
+            <div class="tape"></div>
+            <h1 style="font-family: 'Caveat', cursive; font-size: 36px; color: #be123c;">For Polina ✨</h1>
+            <p style="font-size: 13.5px; color: #64748b; line-height: 1.5; margin-top: 8px;">
+                Wishing you the most magical birthday ever! Here is a digital journal of memories.
             </p>
         </div>
 
-        <!-- Section 1: Floating Polaroid -->
-        <div class="scrapbook-section">
-            <div class="tape-deco"></div>
-            <h3 style="font-family: 'Caveat', cursive; font-size: 28px; color: #be123c;">A Pure Smile 🌸</h3>
-            <div class="polaroid-card" style="--rot: -2deg;">
-                <img src="IMG_20260901_200944_844.jpg" alt="Polina">
-                <div class="polaroid-caption">Brightening up every room! ✨</div>
-            </div>
-        </div>
-
-        <!-- Section 2: Automated Infinite Motion Reel -->
-        <div class="scrapbook-section">
-            <div class="tape-deco"></div>
-            <h3 style="font-family: 'Caveat', cursive; font-size: 28px; color: var(--purple);">Memory Film Roll 🎞️</h3>
-            <p style="font-size: 12px; color: #64748b;">Automated Motion Reel</p>
+        <!-- Motion Reel Section -->
+        <div class="section-box">
+            <div class="tape"></div>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 26px; color: #a855f7;">Smooth Memory Reel 🎞️</h3>
             
-            <div class="auto-reel-container">
-                <div class="reel-track">
-                    <div class="reel-frame"><img src="IMG_20260901_200957_131.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_200959_442.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_201005_331.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_201042_428.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_201044_865.jpg"></div>
-                    <!-- Cloned frames for smooth infinite motion -->
-                    <div class="reel-frame"><img src="IMG_20260901_200957_131.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_200959_442.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_201005_331.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_201042_428.jpg"></div>
-                    <div class="reel-frame"><img src="IMG_20260901_201044_865.jpg"></div>
+            <div class="marquee-box">
+                <div class="marquee-track">
+                    <div class="frame"><img src="IMG_20260901_200944_844.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_200957_131.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_200959_442.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_201005_331.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_201042_428.jpg"></div>
+                    <!-- Duplicate for infinite loop -->
+                    <div class="frame"><img src="IMG_20260901_200944_844.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_200957_131.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_200959_442.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_201005_331.jpg"></div>
+                    <div class="frame"><img src="IMG_20260901_201042_428.jpg"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Section 3: Retro Snap Photo -->
-        <div class="scrapbook-section">
-            <div class="tape-deco"></div>
-            <h3 style="font-family: 'Caveat', cursive; font-size: 28px; color: #0284c7;">Captured Moments 📸</h3>
-            <div class="polaroid-card" style="--rot: 2.5deg;">
-                <img src="IMG_20260901_201054_818.jpg" alt="Polina">
-                <div class="polaroid-caption">Unforgettable charm! 💫</div>
+        <!-- Polaroid Highlights -->
+        <div class="section-box">
+            <div class="tape"></div>
+            <div class="polaroid" style="--r: -2deg;">
+                <img src="IMG_20260901_201044_865.jpg">
+                <div class="polaroid-text">Wonderful Memories 🌸</div>
             </div>
-            <div class="polaroid-card" style="--rot: -1.8deg;">
-                <img src="IMG_20260901_201059_484.jpg" alt="Polina">
-                <div class="polaroid-caption">Always genuine & sweet ✨</div>
+            <div class="polaroid" style="--r: 2deg;">
+                <img src="IMG_20260901_201054_818.jpg">
+                <div class="polaroid-text">Always Glowing ✨</div>
+            </div>
+            <div class="polaroid" style="--r: -1.5deg;">
+                <img src="IMG_20260901_201059_484.jpg">
+                <div class="polaroid-text">Stay Amazing! 💖</div>
             </div>
         </div>
 
-        <!-- Section 4: Grand Collage & Finale Message -->
-        <div class="scrapbook-section">
-            <div class="tape-deco"></div>
-            <h2 style="font-family: 'Dancing Script', cursive; font-size: 38px; color: #be123c;">Happy Birthday Polina! 🎉</h2>
-            <p style="font-size: 14px; line-height: 1.6; color: #334155; margin: 15px 0;">
-                May your upcoming year be packed with laughter, endless happiness, incredible journeys, and all the love in the world! 💖
-            </p>
-            <div class="polaroid-card" style="--rot: 0deg;">
-                <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg" alt="Polina">
-                <div class="polaroid-caption">Best Day Ever! 👑🌸</div>
+        <!-- Final Greeting -->
+        <div class="section-box">
+            <div class="tape"></div>
+            <h2 style="font-family: 'Caveat', cursive; font-size: 34px; color: #be123c;">Have A Blessed Year! 👑</h2>
+            <div class="polaroid" style="--r: 0deg;">
+                <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg">
+                <div class="polaroid-text">Polina ✨</div>
             </div>
         </div>
 
     </div>
 
-    <!-- Audio Element Direct GitHub Path -->
-    <audio id="bgSong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop preload="auto"></audio>
+    <!-- Audio Element -->
+    <audio id="mySong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop></audio>
 
     <script>
-        /* Audio & Entrance Logic */
-        const audio = document.getElementById('bgSong');
-
-        function unlockExperience() {
-            // Play Audio
-            audio.play().catch(err => console.log("Audio play blocked:", err));
-            
-            // Fade out Gate
-            const gate = document.getElementById('gateOverlay');
-            gate.style.opacity = '0';
-            gate.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                gate.style.display = 'none';
-            }, 1000);
-
-            // Trigger Flash & Confetti Burst
-            triggerFlash();
-            burstParticles();
-        }
-
-        function triggerFlash() {
-            const flash = document.getElementById('flashLayer');
-            flash.style.opacity = '1';
-            setTimeout(() => { flash.style.opacity = '0'; }, 250);
-        }
-
-        /* Particle Visual Engine */
-        const canvas = document.getElementById('vfxCanvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-        let particles = [];
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        class HeartParticle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = height + 20;
-                this.size = Math.random() * 14 + 10;
-                this.vy = -Math.random() * 3 - 1.5;
-                this.vx = (Math.random() - 0.5) * 1.5;
-                this.alpha = 1;
-                this.char = ['🌸', '✨', '💖', '🌷', '💫'][Math.floor(Math.random() * 5)];
-            }
-            update() {
-                this.y += this.vy;
-                this.x += this.vx;
-                if(this.y < -20) this.alpha = 0;
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.font = `${this.size}px Montserrat`;
-                ctx.fillText(this.char, this.x, this.y);
-                ctx.restore();
-            }
-        }
-
-        function burstParticles() {
-            for(let i=0; i<30; i++) {
-                particles.push(new HeartParticle());
-            }
-        }
-
-        function renderLoop() {
-            ctx.clearRect(0, 0, width, height);
-            if(Math.random() < 0.08) particles.push(new HeartParticle());
-
-            particles.forEach((p, idx) => {
-                p.update();
-                p.draw();
-                if(p.alpha <= 0) particles.splice(idx, 1);
+        function openBirthdayPage() {
+            var audio = document.getElementById('mySong');
+            audio.play().catch(function(error) {
+                console.log("Playback failed:", error);
             });
-            requestAnimationFrame(renderLoop);
+            
+            var gate = document.getElementById('startGate');
+            gate.style.display = 'none';
         }
-        renderLoop();
     </script>
 </body>
 </html>
