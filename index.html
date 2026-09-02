@@ -25,7 +25,6 @@
     min-height:100vh;
   }
 
-  /* ---------- Start gate ---------- */
   #startGate{
     position:fixed; inset:0; z-index:9999;
     background:radial-gradient(circle at 50% 30%, var(--emerald2), var(--black) 75%);
@@ -41,19 +40,15 @@
     border:1px solid var(--gold);
     position:relative;
   }
-  .card::before, .card::after{
-    content:''; position:absolute; width:26px; height:26px;
-    border:1px solid var(--gold);
-  }
+  .card::before, .card::after{content:''; position:absolute; width:26px; height:26px; border:1px solid var(--gold);}
   .card::before{top:10px; left:10px; border-right:none; border-bottom:none;}
   .card::after{bottom:10px; right:10px; border-left:none; border-top:none;}
-  .card .eyebrow{font-family:'Cormorant Garamond',serif; letter-spacing:4px; font-size:11px; color:var(--gold); text-transform:uppercase;}
+  .card .eyebrow{letter-spacing:4px; font-size:11px; color:var(--gold); text-transform:uppercase;}
   .card h1{font-family:'Playfair Display',serif; font-style:italic; font-weight:600; font-size:30px; color:var(--gold-bright); margin-top:10px;}
   .card h2{font-family:'Caveat',cursive; font-size:28px; color:var(--cream); margin-top:2px;}
   .card p{font-size:16px; color:#c9c2b3; margin-top:14px; line-height:1.55;}
   .play-btn{
-    background:transparent;
-    color:var(--gold-bright); border:1px solid var(--gold); padding:14px 30px;
+    background:transparent; color:var(--gold-bright); border:1px solid var(--gold); padding:14px 30px;
     font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
     cursor:pointer; margin-top:24px;
   }
@@ -65,7 +60,6 @@
     padding:10px 18px; border-radius:2px; box-shadow:0 8px 20px rgba(0,0,0,.4);
     display:none; z-index:9998; cursor:pointer; letter-spacing:.5px;
   }
-
   #musicToggle{
     position:fixed; top:16px; right:16px; z-index:500;
     width:42px; height:42px; border-radius:50%;
@@ -74,42 +68,49 @@
     color:var(--gold-bright); font-size:16px; display:flex; align-items:center; justify-content:center;
     cursor:pointer;
   }
-
   #progressWrap{position:fixed; top:0; left:0; width:100%; height:3px; z-index:500; background:rgba(255,255,255,.06);}
   #progressBar{height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-bright)); transition:width .1s;}
 
   .container{max-width:480px; margin:0 auto; padding:70px 18px 100px;}
-
   .reveal{opacity:0; transform:translateY(24px); transition:opacity .9s ease, transform .9s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
-
-  .divider{width:60px; height:1px; background:var(--gold); margin:0 auto 34px; opacity:.6;}
 
   .section-box{
     background:linear-gradient(180deg, rgba(246,239,225,.03), rgba(246,239,225,0));
     border:1px solid rgba(205,169,101,.35);
-    padding:34px 22px; margin-bottom:40px;
+    padding:34px 20px; margin-bottom:40px;
     text-align:center; position:relative;
   }
-  .section-box::before, .section-box::after{
-    content:''; position:absolute; width:16px; height:16px; border:1px solid var(--gold);
-  }
+  .section-box::before, .section-box::after{content:''; position:absolute; width:16px; height:16px; border:1px solid var(--gold);}
   .section-box::before{top:-1px; left:-1px; border-right:none; border-bottom:none;}
   .section-box::after{bottom:-1px; right:-1px; border-left:none; border-top:none;}
-
-  .eyebrow-script{
-    font-family:'Cormorant Garamond',serif; letter-spacing:4px; font-size:11px;
-    color:var(--gold); text-transform:uppercase; margin-bottom:14px;
-  }
+  .eyebrow-script{letter-spacing:4px; font-size:11px; color:var(--gold); text-transform:uppercase; margin-bottom:14px;}
 
   .hero-title{font-family:'Playfair Display',serif; font-style:italic; font-weight:600; font-size:36px; color:var(--gold-bright); text-align:center; line-height:1.3;}
   .hero-sub{font-family:'Caveat',cursive; font-size:23px; color:var(--cream); text-align:center; margin-top:6px; opacity:.85;}
-  #typewriter{
-    font-size:17px; color:#cfc7b6; text-align:center; min-height:80px;
-    max-width:340px; margin:26px auto 0; line-height:1.7; font-style:italic;
-  }
+  #typewriter{font-size:17px; color:#cfc7b6; text-align:center; min-height:80px; max-width:340px; margin:26px auto 0; line-height:1.7; font-style:italic;}
   .cursor{display:inline-block; width:1px; background:var(--gold); animation:blink 1s step-end infinite;}
   @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- Camera Roll grid (7x8) ---------- */
+  #cameraStage{position:relative; border:1px solid var(--gold); background:var(--black); padding:16px; margin-top:16px;}
+  .cam-icon{font-size:26px; margin-bottom:10px; opacity:.8;}
+  .roll-grid{
+    display:grid; grid-template-columns:repeat(7, 1fr); gap:4px;
+  }
+  .roll-cell{
+    aspect-ratio:1/1; overflow:hidden; opacity:0; transform:scale(.6);
+    transition:opacity .35s ease, transform .35s ease;
+    position:relative; background:#000;
+  }
+  .roll-cell img{width:100%; height:100%; object-fit:cover; filter:brightness(.9);}
+  .roll-cell.shot{opacity:1; transform:scale(1);}
+  .roll-cell .flash{
+    position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none;
+  }
+  .roll-cell.shot .flash{animation:flashPop .35s ease-out;}
+  @keyframes flashPop{0%{opacity:.9;}100%{opacity:0;}}
+  .roll-caption{font-size:11px; letter-spacing:1px; color:#8a8371; margin-top:12px;}
 
   .marquee-box{
     overflow:hidden; width:100%; background:var(--black); padding:14px 0;
@@ -120,6 +121,26 @@
   @keyframes reelMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
   .frame{width:118px; height:158px; background:var(--gold); padding:4px; flex-shrink:0;}
   .frame img{width:100%; height:100%; object-fit:cover;}
+
+  /* ---------- The Chase ---------- */
+  #chaseStage{position:relative; height:230px; overflow:hidden; border:1px solid var(--gold); background:linear-gradient(180deg,var(--emerald2),var(--black));}
+  .chase-photo{
+    position:absolute; top:50%; left:42%; transform:translate(-50%,-50%);
+    width:110px; height:140px; background:#fff; padding:6px 6px 18px 6px; box-shadow:0 8px 20px rgba(0,0,0,.4);
+    transition:left 1.6s ease-in, top 1.6s ease-in, transform 1.6s ease-in, opacity .4s ease;
+    z-index:3;
+  }
+  .chase-photo img{width:100%; height:100%; object-fit:cover;}
+  #chaseStage.grabbed .chase-photo{left:118%; top:38%; transform:translate(-50%,-50%) rotate(18deg);}
+  #chaseStage.returned .chase-photo{left:50%; top:52%; transform:translate(-50%,-50%) rotate(-3deg); transition:left 1s ease-out, top 1s cubic-bezier(.34,1.56,.64,1), transform 1s ease-out;}
+  .chase-char{
+    position:absolute; bottom:14px; left:-20%; font-size:44px; z-index:4;
+    transition:left 1.8s ease-in;
+  }
+  #chaseStage.grabbed .chase-char{left:112%;}
+  #chaseStage.returned .chase-char{left:-20%; transition:left 1.2s ease-in;}
+  .chase-caption{font-size:15px; font-family:'Caveat',cursive; color:var(--gold-bright); margin-top:14px; min-height:22px;}
+  .chase-hint{font-size:11px; letter-spacing:1px; color:#8a8371; margin-top:4px;}
 
   .gallery{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
   .flip-card{background:transparent; height:170px; perspective:900px; cursor:pointer;}
@@ -166,10 +187,7 @@
   }
   #envelope.open ~ #letterText{display:block;}
 
-  .polaroid{
-    background:var(--gold); padding:10px 10px 24px 10px; margin:18px auto;
-    max-width:260px;
-  }
+  .polaroid{background:var(--gold); padding:10px 10px 24px 10px; margin:18px auto; max-width:260px;}
   .polaroid img{width:100%; height:230px; object-fit:cover;}
   .polaroid-text{font-family:'Caveat',cursive; font-size:20px; color:var(--black); margin-top:8px;}
 
@@ -210,6 +228,16 @@
     <div id="typewriter"><span id="twText"></span><span class="cursor">&nbsp;</span></div>
   </div>
 
+  <!-- Camera Roll 7x8 -->
+  <div class="section-box reveal" id="cameraSection">
+    <div class="eyebrow-script">camera roll</div>
+    <div class="cam-icon">📷</div>
+    <div id="cameraStage">
+      <div class="roll-grid" id="rollGrid"></div>
+    </div>
+    <div class="roll-caption">56 shots. every one of them, you.</div>
+  </div>
+
   <div class="section-box reveal">
     <div class="eyebrow-script">memory reel</div>
     <div class="marquee-box">
@@ -229,15 +257,20 @@
     <div class="flip-hint">it loops — enjoy the ride</div>
   </div>
 
+  <!-- The Chase -->
+  <div class="section-box reveal">
+    <div class="eyebrow-script">the chase</div>
+    <div id="chaseStage">
+      <div class="chase-photo"><img src="IMG_20260901_201044_865.jpg" alt=""></div>
+      <div class="chase-char">🦝</div>
+    </div>
+    <div class="chase-caption" id="chaseCaption">someone's after your photo...</div>
+    <div class="chase-hint">watch closely</div>
+  </div>
+
   <div class="section-box reveal">
     <div class="eyebrow-script">tap a photograph</div>
     <div class="gallery">
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-inner">
-          <div class="flip-front"><img src="IMG_20260901_201044_865.jpg" alt=""></div>
-          <div class="flip-back">you make ordinary days feel special</div>
-        </div>
-      </div>
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-inner">
           <div class="flip-front"><img src="IMG_20260901_201054_818.jpg" alt=""></div>
@@ -254,6 +287,12 @@
         <div class="flip-inner">
           <div class="flip-front"><img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg" alt=""></div>
           <div class="flip-back">happy birthday, Polina</div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="IMG_20260901_200944_844.jpg" alt=""></div>
+          <div class="flip-back">you make ordinary days feel special</div>
         </div>
       </div>
     </div>
@@ -296,15 +335,17 @@
 
 </div>
 
-<audio id="mySong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop preload="auto"></audio>
+<audio id="mySong" src="song.mp3" loop preload="auto"></audio>
 
 <script>
+/* ---------------- Audio ---------------- */
 const audio = document.getElementById('mySong');
 const soundHint = document.getElementById('soundHint');
 const musicToggle = document.getElementById('musicToggle');
 let musicOn = false;
 
 function tryPlay(){
+  audio.currentTime = 0;
   const p = audio.play();
   if(p !== undefined){
     p.then(()=>{ musicOn = true; soundHint.style.display='none'; musicToggle.textContent='♪'; })
@@ -323,6 +364,7 @@ function openBirthdayPage(){
   startStory();
 }
 
+/* ---------------- Scroll reveal + progress ---------------- */
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
@@ -335,10 +377,11 @@ window.addEventListener('scroll', ()=>{
   document.getElementById('progressBar').style.width = pct + '%';
 });
 
+/* ---------------- Typewriter ---------------- */
 const lines = [
-  "Kisi khaas insaan ke liye...",
-  "yeh chhota sa digital surprise banaya hai.",
-  "Scroll karo, thoda khelo, aur end tak zaroor jaana."
+  "For someone special...",
+  "a small digital surprise, made just for you.",
+  "Scroll down, play a little, and make sure you reach the end."
 ];
 function startStory(){
   const el = document.getElementById('twText');
@@ -353,6 +396,66 @@ function startStory(){
   type();
 }
 
+/* ---------------- Camera Roll 7x8 ---------------- */
+const rollImages = [
+  "IMG_20260901_200944_844.jpg","IMG_20260901_200957_131.jpg","IMG_20260901_200959_442.jpg",
+  "IMG_20260901_201005_331.jpg","IMG_20260901_201042_428.jpg","IMG_20260901_201044_865.jpg",
+  "IMG_20260901_201054_818.jpg","IMG_20260901_201059_484.jpg",
+  "Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg"
+];
+const rollGrid = document.getElementById('rollGrid');
+const TOTAL_CELLS = 56;
+for(let i=0;i<TOTAL_CELLS;i++){
+  const cell = document.createElement('div');
+  cell.className = 'roll-cell';
+  const img = document.createElement('img');
+  img.src = rollImages[i % rollImages.length];
+  const flash = document.createElement('div');
+  flash.className = 'flash';
+  cell.appendChild(img);
+  cell.appendChild(flash);
+  rollGrid.appendChild(cell);
+}
+let rollFired = false;
+const rollObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !rollFired){
+      rollFired = true;
+      const cells = document.querySelectorAll('.roll-cell');
+      cells.forEach((c,i)=>{
+        setTimeout(()=>c.classList.add('shot'), i*35);
+      });
+      rollObs.disconnect();
+    }
+  });
+},{threshold:.2});
+rollObs.observe(document.getElementById('cameraSection'));
+
+/* ---------------- The Chase ---------------- */
+let chaseFired = false;
+const chaseCaption = document.getElementById('chaseCaption');
+const chaseObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !chaseFired){
+      chaseFired = true;
+      const stage = document.getElementById('chaseStage');
+      setTimeout(()=>{
+        stage.classList.add('grabbed');
+        chaseCaption.textContent = "Caught it! Running off with a memory...";
+      }, 600);
+      setTimeout(()=>{
+        stage.classList.remove('grabbed');
+        stage.classList.add('returned');
+        chaseCaption.textContent = "...just kidding. This one's yours. Happy Birthday!";
+        celebrate(false);
+      }, 2600);
+      chaseObs.disconnect();
+    }
+  });
+},{threshold:.4});
+chaseObs.observe(document.getElementById('chaseStage'));
+
+/* ---------------- Balloon pop game ---------------- */
 const balloonWords = ['Happy','Birthday','Polina','you','are','loved'];
 const balloonColors = ['#cda965','#3d1220','#183327','#8a6d3b','#5c2233','#0f2419'];
 let popped = 0;
@@ -380,6 +483,7 @@ function popBalloon(b){
 }
 setInterval(()=>{ if(popped < balloonWords.length){ spawnBalloon(Math.floor(Math.random()*balloonWords.length)); } }, 1100);
 
+/* ---------------- Envelope ---------------- */
 let letterOpened = false;
 function openEnvelope(){
   const env = document.getElementById('envelope');
@@ -387,6 +491,7 @@ function openEnvelope(){
   if(!letterOpened){ letterOpened = true; setTimeout(()=>celebrate(false), 400); }
 }
 
+/* ---------------- Confetti ---------------- */
 const canvas = document.getElementById('confettiCanvas');
 const ctx = canvas.getContext('2d');
 function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -435,4 +540,4 @@ const finaleObs = new IntersectionObserver((entries)=>{
 finaleObs.observe(document.getElementById('finale'));
 </script>
 </body>
-          </html>
+  </html>
