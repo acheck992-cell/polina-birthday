@@ -95,9 +95,7 @@
   /* ---------- Camera Roll grid (7x8) ---------- */
   #cameraStage{position:relative; border:1px solid var(--gold); background:var(--black); padding:16px; margin-top:16px;}
   .cam-icon{font-size:26px; margin-bottom:10px; opacity:.8;}
-  .roll-grid{
-    display:grid; grid-template-columns:repeat(7, 1fr); gap:4px;
-  }
+  .roll-grid{display:grid; grid-template-columns:repeat(7, 1fr); gap:4px;}
   .roll-cell{
     aspect-ratio:1/1; overflow:hidden; opacity:0; transform:scale(.6);
     transition:opacity .35s ease, transform .35s ease;
@@ -105,9 +103,7 @@
   }
   .roll-cell img{width:100%; height:100%; object-fit:cover; filter:brightness(.9);}
   .roll-cell.shot{opacity:1; transform:scale(1);}
-  .roll-cell .flash{
-    position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none;
-  }
+  .roll-cell .flash{position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none;}
   .roll-cell.shot .flash{animation:flashPop .35s ease-out;}
   @keyframes flashPop{0%{opacity:.9;}100%{opacity:0;}}
   .roll-caption{font-size:11px; letter-spacing:1px; color:#8a8371; margin-top:12px;}
@@ -133,10 +129,7 @@
   .chase-photo img{width:100%; height:100%; object-fit:cover;}
   #chaseStage.grabbed .chase-photo{left:118%; top:38%; transform:translate(-50%,-50%) rotate(18deg);}
   #chaseStage.returned .chase-photo{left:50%; top:52%; transform:translate(-50%,-50%) rotate(-3deg); transition:left 1s ease-out, top 1s cubic-bezier(.34,1.56,.64,1), transform 1s ease-out;}
-  .chase-char{
-    position:absolute; bottom:14px; left:-20%; font-size:44px; z-index:4;
-    transition:left 1.8s ease-in;
-  }
+  .chase-char{position:absolute; bottom:14px; left:-20%; font-size:44px; z-index:4; transition:left 1.8s ease-in;}
   #chaseStage.grabbed .chase-char{left:112%;}
   #chaseStage.returned .chase-char{left:-20%; transition:left 1.2s ease-in;}
   .chase-caption{font-size:15px; font-family:'Caveat',cursive; color:var(--gold-bright); margin-top:14px; min-height:22px;}
@@ -211,7 +204,7 @@
     <div class="eyebrow">an invitation</div>
     <h1>Happy Birthday</h1>
     <h2>Dear Polina 🌸</h2>
-    <p>A little journal made only for you — photographs, memories and a few small surprises.<br>Take three quiet minutes, and begin.</p>
+    <p>A little page made by a friend — photographs, memories and a few small surprises.<br>Take three minutes, and begin.</p>
     <button class="play-btn" onclick="openBirthdayPage()">Begin the Experience</button>
   </div>
 </div>
@@ -222,9 +215,9 @@
 <div class="container">
 
   <div class="section-box reveal">
-    <div class="eyebrow-script">for someone special</div>
+    <div class="eyebrow-script">from your friend</div>
     <div class="hero-title">Polina's<br>Birthday Journal</div>
-    <div class="hero-sub">made with love, just for you</div>
+    <div class="hero-sub">put together for a great friend</div>
     <div id="typewriter"><span id="twText"></span><span class="cursor">&nbsp;</span></div>
   </div>
 
@@ -235,7 +228,7 @@
     <div id="cameraStage">
       <div class="roll-grid" id="rollGrid"></div>
     </div>
-    <div class="roll-caption">56 shots. every one of them, you.</div>
+    <div class="roll-caption">56 shots. good memories, all of them.</div>
   </div>
 
   <div class="section-box reveal">
@@ -274,13 +267,13 @@
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-inner">
           <div class="flip-front"><img src="IMG_20260901_201054_818.jpg" alt=""></div>
-          <div class="flip-back">always glowing, always you</div>
+          <div class="flip-back">good energy, as always</div>
         </div>
       </div>
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-inner">
           <div class="flip-front"><img src="IMG_20260901_201059_484.jpg" alt=""></div>
-          <div class="flip-back">this smile deserves the world</div>
+          <div class="flip-back">this smile deserves a great year</div>
         </div>
       </div>
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -292,7 +285,7 @@
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-inner">
           <div class="flip-front"><img src="IMG_20260901_200944_844.jpg" alt=""></div>
-          <div class="flip-back">you make ordinary days feel special</div>
+          <div class="flip-back">you make ordinary days more fun</div>
         </div>
       </div>
     </div>
@@ -316,16 +309,16 @@
     <div class="letter-hint">tap the envelope</div>
     <div id="letterText">
       Dear Polina,<br><br>
-      On your special day, I just want you to know how much your friendship means.
-      Every memory in this little page is a reminder of how much fun, comfort and laughter
-      you bring into my life.<br><br>
-      Here's to another year of your kindness, your energy, and your amazing self.
-      Happy Birthday — I hope this year gives you everything you deserve.
+      On your birthday, I just wanted to say how much I value having you as a friend.
+      Every memory on this page is a reminder of the good times, the laughs, and the
+      random conversations that make hanging out with you fun.<br><br>
+      Here's to another great year for you — more fun, more memories, more good stuff.
+      Happy Birthday, and stay awesome.
     </div>
   </div>
 
   <div class="section-box reveal" id="finale">
-    <div class="hero-title">Have A Blessed Year</div>
+    <div class="hero-title">Have A Great Year Ahead</div>
     <div class="polaroid">
       <img src="Screenshot_2026-09-01-20-10-20-633_com.instagram.android-edit.jpg" alt="">
       <div class="polaroid-text">Polina ✨</div>
@@ -335,7 +328,7 @@
 
 </div>
 
-<audio id="mySong" src="song.mp3" loop preload="auto"></audio>
+<audio id="mySong" src="Buck Owens - Made In Japan (sped up) [HeRjqQeu5NF].mp3" loop preload="auto"></audio>
 
 <script>
 /* ---------------- Audio ---------------- */
@@ -379,8 +372,8 @@ window.addEventListener('scroll', ()=>{
 
 /* ---------------- Typewriter ---------------- */
 const lines = [
-  "For someone special...",
-  "a small digital surprise, made just for you.",
+  "Made for a great friend...",
+  "a small digital birthday page, put together just for you.",
   "Scroll down, play a little, and make sure you reach the end."
 ];
 function startStory(){
@@ -456,7 +449,7 @@ const chaseObs = new IntersectionObserver((entries)=>{
 chaseObs.observe(document.getElementById('chaseStage'));
 
 /* ---------------- Balloon pop game ---------------- */
-const balloonWords = ['Happy','Birthday','Polina','you','are','loved'];
+const balloonWords = ['Happy','Birthday','Polina','you','are','awesome'];
 const balloonColors = ['#cda965','#3d1220','#183327','#8a6d3b','#5c2233','#0f2419'];
 let popped = 0;
 const field = document.getElementById('balloonField');
